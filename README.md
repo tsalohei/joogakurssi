@@ -6,4 +6,4 @@ Tämän sovelluksen avulla voi varata paikkoja joogakoulu Superjoogan kursseilta
 
 * Ohjaaja
 
-Varausjärjestelmän tietokantakaavio löytyy [täältä](http://yuml.me/4bc7139c.png).
+Varausjärjestelmän tietokantakaavio löytyy [täältä](https://github.com/tsalohei/joogakurssi/blob/master/docs/tietokantakaavio.png).
