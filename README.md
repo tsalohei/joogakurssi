@@ -7,4 +7,4 @@ Joogakurssi on kertaluontoinen opetustapahtuma. Käytyään tietyllä joogakurss
 Käyttäjäryhmiä tässä tietokantasovelluksessa on kaksi. Asiakkaat voivat kirjautua järjestelmään, katsella tulevia kursseja ja varata paikan kurssilta. Ohjaajat voivat kirjautua järjestelmään, lisätä ja poistaa opetustapahtumia, ja hallinnoida asiakkaita. 
 
 
-Varausjärjestelmän tietokantakaavio löytyy [täältä](https://github.com/tsalohei/joogakurssi/blob/master/docs/tietokantakaavio100919.png).
+Varausjärjestelmän tietokantakaavio löytyy [täältä](https://github.com/tsalohei/joogakurssi/blob/master/documentation/tietokantakaavio1109.png).
