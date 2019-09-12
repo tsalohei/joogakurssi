@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+
+<h1>Kaikki asiakkaat</h1>
+<table>
+    <tr>
+        <th>etunimi</th>
+        <th>sukunimi</th>
+        <th>käyttäjätunnus</th>
+    </tr>
+    {% for x in asiakas %}
+    <tr>
+        <td>{{ x.etunimi }}</td>
+        <td>{{ x.sukunimi }}</td>
+        <td>{{ x.login }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

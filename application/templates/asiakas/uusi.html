@@ -1,0 +1,23 @@
+<!-- uuden asiakkaan rekisteröinti. Oho, kirjautumisasiat olivatkin vasta 3. vkolla-->
+{% extends "layout.html" %}
+  
+{% block body %}
+<form method="POST" action="{{ url_for('asiakas_create') }}">
+  
+  <label for="etunimi">etunimi</label>
+  <input type="text" name="etunimi"/>
+
+  <label for="sukunimi">sukunimi</label>
+  <input type="text" name="sukunimi"/>
+
+  <label for="login">käyttäjätunnus</label>
+  <input type="text" name="login"/>
+
+  <label for="salasana">salasana</label>
+  <input type="password" name="salasana"/>
+
+  <input type="submit" value="Rekisteröidy"/>
+</form>
+
+
+{% endblock %}
