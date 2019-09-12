@@ -10,3 +10,5 @@ Käyttäjäryhmiä tässä tietokantasovelluksessa on kaksi. Asiakkaat voivat ki
 Varausjärjestelmän tietokantakaavio löytyy [täältä](https://github.com/tsalohei/joogakurssi/blob/master/documentation/tietokantakaavio1109.png).
 
 Herokussa toimivan sovelluksen löydät [täältä](https://tsalohei-joogakurssi.herokuapp.com/).
+
+Käyttötapaukset löytyvät [täältä](https://github.com/tsalohei/joogakurssi/blob/master/documentation/kayttotapaukset.md).
