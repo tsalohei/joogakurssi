@@ -1,4 +1,4 @@
-#Oleelliset käyttötapaukset
+# Oleelliset käyttötapaukset
 
 * Asiakas rekisteröityy käyttäjäksi joogastudio Superjoogan kurssivarausjärjestelmään.
 
