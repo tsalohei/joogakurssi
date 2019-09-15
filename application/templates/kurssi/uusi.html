@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<form method="POST" action="{{ url_for('kurssi_create') }}">
+  
+  <label for="kuvaus">kuvaus</label>
+ <!-- <input type="text" name="kuvaus"/> TÄN VOI POISTAA?-->
+  <select name = "kuvaus">
+    <option value="alkeis">alkeis</option>
+    <option value="jatko">jatko</option>
+    <option value="seniori">seniori</option>
+    <option value="nauru">nauru</option>
+    <option value="mamma">äitiys</option>
+  </select>
+
+  <label for="pvm">päivämäärä</label>
+  <input type="date" name="pvm"/>
+
+  <label for="kellonaika">kellonaika</label>
+  <input type="time" name="kellonaika"/>
+
+  <label for="kesto">kesto (tuntia)</label>
+  <input type="number" name="kesto"/>
+
+  <input type="submit" value="lisää kurssi"/>
+</form>
+
+
+{% endblock %}

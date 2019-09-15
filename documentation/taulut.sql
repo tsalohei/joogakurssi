@@ -6,3 +6,10 @@ CREATE TABLE asiakas (
 	salasana VARCHAR(144) NOT NULL, 
 	PRIMARY KEY (id)
 )
+CREATE TABLE kurssi (
+	id INTEGER NOT NULL, 
+	kuvaus VARCHAR(144) NOT NULL, 
+	aika DATETIME NOT NULL, 
+	kesto INTEGER NOT NULL, 
+	PRIMARY KEY (id)
+)

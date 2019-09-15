@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+
+<h1>Lista kursseista</h1>
+<table>
+    <tr>
+        <th>Kurssin nimi</th>
+        <th>ajankohta</th>
+        <th>kesto</th>
+        
+    </tr>
+    {% for x in kurssi %}
+    <tr>
+        <td>{{ x.kuvaus }}</td>
+        <td>{{ x.aika }}</td>
+        <td>{{ x.kesto }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
