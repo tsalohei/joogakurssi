@@ -9,7 +9,7 @@ def kurssi_index():
 
 @app.route("/kurssi/uusi/")
 def kurssi_form():
-    return render_template("kurssi/uusi.html")
+    return render_template("kurssi/uusi.html", kurssi = Kurssi.query.all())
 
 @app.route("/kurssi/", methods=["POST"])
 def kurssi_create():

@@ -21,5 +21,7 @@ from application.asiakas import views
 from application.kurssi import models
 from application.kurssi import views 
 
+from application.ohjaaja import models
+
 # Luodaan lopulta tarvittavat tietokantataulut
 db.create_all()

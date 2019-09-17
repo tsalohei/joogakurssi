@@ -13,3 +13,10 @@ CREATE TABLE kurssi (
 	kesto INTEGER NOT NULL, 
 	PRIMARY KEY (id)
 )
+CREATE TABLE ohjaaja (
+	id INTEGER NOT NULL, 
+	etunimi VARCHAR(144) NOT NULL, 
+	sukunimi VARCHAR(144) NOT NULL, 
+	login VARCHAR(144) NOT NULL, 
+	salasana VARCHAR(144) NOT NULL, 
+	PRIMARY KEY (id)

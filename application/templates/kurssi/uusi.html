@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
   
 {% block body %}
+
+<h1>Lisää uusi kurssi</h1>
 <form method="POST" action="{{ url_for('kurssi_create') }}">
   
   <label for="kuvaus">kuvaus</label>
- <!-- <input type="text" name="kuvaus"/> TÄN VOI POISTAA?-->
   <select name = "kuvaus">
     <option value="alkeis">alkeis</option>
     <option value="jatko">jatko</option>
@@ -12,6 +13,8 @@
     <option value="nauru">nauru</option>
     <option value="mamma">äitiys</option>
   </select>
+
+<!--tähän lisätään tieto ohjaajasta-->
 
   <label for="pvm">päivämäärä</label>
   <input type="date" name="pvm"/>
@@ -24,6 +27,29 @@
 
   <input type="submit" value="lisää kurssi"/>
 </form>
+
+<h1>Muokkaa kursseja</h1>
+<table>
+    <tr>
+        <th>Kurssin nimi</th>
+        <th>ajankohta</th>
+        <th>kesto</th>
+        
+    </tr>
+    {% for x in kurssi %}
+    <tr>
+        <td>{{ x.kuvaus }}</td>
+        <td>{{ x.aika }}</td>
+        <td>{{ x.kesto }}</td>
+        <!--mieti miten nää saa toimimaan. method & action pitää olla. Molempien metodina 
+        POST. Action url for (kummallekin uusi metodi, molemmilla uusi osoite kuten kurssi/poista
+        ja kurssi/muokkaa. EIKUN: VAIN DELETE ON FORM, TOINEN ON LINKKI a href kuten 
+        layout-sivulla)-->
+        <td><form><input type="submit" value="muokkaa kurssia"/></form></td>
+        <td><form><input type="submit" value="poista kurssi"/></form></td>
+    </tr>
+    {% endfor %}
+</table>
 
 
 {% endblock %}
