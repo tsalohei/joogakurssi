@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('kurssi_muokkaa_save', id=id) }}">
+  
+    {{form.kuvaus.label}}
+    {{form.kuvaus}}
+    {{form.pvm.label}}
+    {{form.pvm}}
+    {{form.kellonaika.label}}
+    {{form.kellonaika}}
+    {{form.kesto.label}}
+    {{form.kesto}}
+    <input type="submit" value="päivitä"/>
+  </form>
+{% endblock %}
+<!--mieti miten saisi kerrottua tälle sivulle mitä id:tä käsitellään.
+lähetä 2 muuttujaa views.py:stä: form ja id (eli form on jo). Kun painetaan päivitä, 
+niin url for kurssi_muokkaa_save (eli sille uusi osoite views-pyssä) kurssi/muokkaa/save/id tms
+hae dbstä, sit kenttä kerrallaan formista, ja sitten päivitä db-objekti, ja sit tallenna-->

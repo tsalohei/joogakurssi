@@ -2,6 +2,7 @@
 from application import app, db
 from flask import render_template, request, redirect, url_for
 from application.asiakas.models import Asiakas
+from application.asiakas.forms import AsiakasLomake
 
 @app.route("/asiakas/")
 def asiakas_index():
@@ -9,12 +10,17 @@ def asiakas_index():
 
 @app.route("/asiakas/uusi/")
 def asiakas_form():
-    return render_template("asiakas/uusi.html")
+    return render_template("asiakas/uusi.html", form = AsiakasLomake())
 
 @app.route("/asiakas/", methods=["POST"])
 def asiakas_create():
-    a = Asiakas(request.form.get("etunimi"), request.form.get("sukunimi"), 
-    request.form.get("login"), request.form.get("salasana"))
+    form = AsiakasLomake(request.form)
+
+    a = Asiakas(form.etunimi.data, form.sukunimi.data, form.login.data, 
+    form.salasana.data)
+
+    #a = Asiakas(request.form.get("etunimi"), request.form.get("sukunimi"), 
+    #request.form.get("login"), request.form.get("salasana")
   
     db.session().add(a)
     db.session().commit()

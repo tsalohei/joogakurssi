@@ -5,28 +5,16 @@
 <h1>Lisää uusi kurssi</h1>
 <form method="POST" action="{{ url_for('kurssi_create') }}">
   
-  <label for="kuvaus">kuvaus</label>
-  <select name = "kuvaus">
-    <option value="alkeis">alkeis</option>
-    <option value="jatko">jatko</option>
-    <option value="seniori">seniori</option>
-    <option value="nauru">nauru</option>
-    <option value="mamma">äitiys</option>
-  </select>
-
-<!--tähän lisätään tieto ohjaajasta-->
-
-  <label for="pvm">päivämäärä</label>
-  <input type="date" name="pvm"/>
-
-  <label for="kellonaika">kellonaika</label>
-  <input type="time" name="kellonaika"/>
-
-  <label for="kesto">kesto (tuntia)</label>
-  <input type="number" name="kesto"/>
-
-  <input type="submit" value="lisää kurssi"/>
-</form>
+    {{form.kuvaus.label}}
+    {{form.kuvaus}}
+    {{form.pvm.label}}
+    {{form.pvm}}
+    {{form.kellonaika.label}}
+    {{form.kellonaika}}
+    {{form.kesto.label}}
+    {{form.kesto}}
+    <input type="submit" value="lisää kurssi"/>
+  </form>
 
 <h1>Muokkaa kursseja</h1>
 <table>
@@ -41,12 +29,16 @@
         <td>{{ x.kuvaus }}</td>
         <td>{{ x.aika }}</td>
         <td>{{ x.kesto }}</td>
-        <!--mieti miten nää saa toimimaan. method & action pitää olla. Molempien metodina 
-        POST. Action url for (kummallekin uusi metodi, molemmilla uusi osoite kuten kurssi/poista
-        ja kurssi/muokkaa. EIKUN: VAIN DELETE ON FORM, TOINEN ON LINKKI a href kuten 
-        layout-sivulla)-->
-        <td><form><input type="submit" value="muokkaa kurssia"/></form></td>
-        <td><form><input type="submit" value="poista kurssi"/></form></td>
+
+        <td><a href="{{ url_for('kurssi_muokkaa', id=x.id ) }}">Päivitä kurssin tietoja</a></td>
+
+        <td>
+          <form method="POST" action="{{ url_for('kurssi_poista') }}">
+            <input type ="hidden" name="kurssi_id" value ="{{x.id}}"/>
+
+            <input type="submit" value="poista kurssi"/>
+          </form>
+        </td>
     </tr>
     {% endfor %}
 </table>

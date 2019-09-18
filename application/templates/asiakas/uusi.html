@@ -3,7 +3,22 @@
   
 {% block body %}
 <form method="POST" action="{{ url_for('asiakas_create') }}">
-  
+  {{form.etunimi.label}}
+  {{form.etunimi}}
+  {{form.sukunimi.label}}
+  {{form.sukunimi}}
+  {{form.login.label}}
+  {{form.login}}
+  {{form.salasana.label}}
+  {{form.salasana}}  
+  <input type="submit" value="Rekisteröidy"/> 
+</form>
+
+
+{% endblock %}
+
+
+<!--
   <label for="etunimi">etunimi</label>
   <input type="text" name="etunimi"/>
 
@@ -15,9 +30,4 @@
 
   <label for="salasana">salasana</label>
   <input type="password" name="salasana"/>
-
-  <input type="submit" value="Rekisteröidy"/>
-</form>
-
-
-{% endblock %}
+-->
