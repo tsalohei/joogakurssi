@@ -13,7 +13,23 @@
   {{form.salasana}}  
   <input type="submit" value="Rekisteröidy"/> 
 </form>
+<ul>
+    {% for error in form.etunimi.errors %}
+      <li style="color:red;">{{ error }}</li>
+    {% endfor %}
+    
+    {% for error in form.sukunimi.errors %}
+    <li style="color:red;">{{ error }}</li>
+    {% endfor %}
 
+    {% for error in form.login.errors %}
+    <li style="color:red;">{{ error }}</li>
+    {% endfor %}
+
+    {% for error in form.salasana.errors %}
+    <li style="color:red;">{{ error }}</li>
+    {% endfor %}
+</ul>
 
 {% endblock %}
 
