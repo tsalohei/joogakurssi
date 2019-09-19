@@ -13,8 +13,9 @@
     {{form.kesto}}
     <input type="submit" value="päivitä"/>
   </form>
+  <ul>
+      {% for error in form.kesto.errors %}
+      <li style="color:red;">{{ error }}</li>
+      {% endfor %}
+  </ul>
 {% endblock %}
-<!--mieti miten saisi kerrottua tälle sivulle mitä id:tä käsitellään.
-lähetä 2 muuttujaa views.py:stä: form ja id (eli form on jo). Kun painetaan päivitä, 
-niin url for kurssi_muokkaa_save (eli sille uusi osoite views-pyssä) kurssi/muokkaa/save/id tms
-hae dbstä, sit kenttä kerrallaan formista, ja sitten päivitä db-objekti, ja sit tallenna-->

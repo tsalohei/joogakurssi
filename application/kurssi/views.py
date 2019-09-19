@@ -16,6 +16,9 @@ def kurssi_form():
 def kurssi_create():
     form = KurssiLomake(request.form)
 
+    if not form.validate():
+        return render_template("kurssi/uusi.html", form = form, kurssi = Kurssi.query.all())
+
     pvm = form.pvm.data
     kellonaika = form.kellonaika.data    
 
@@ -44,6 +47,9 @@ def kurssi_muokkaa(id):
 def kurssi_muokkaa_save(id):
     x = db.session.query(Kurssi).get(id)
     form = KurssiLomake(request.form) 
+
+    if not form.validate():
+        return render_template("kurssi/muokkaa.html", form = form, id = x.id)
     
     x.kuvaus = form.kuvaus.data
     
@@ -58,7 +64,6 @@ def kurssi_muokkaa_save(id):
     db.session.commit()
 
     return redirect(url_for("kurssi_form"))
-    #https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_orm_updating_objects.htm
 
 @app. route("/kurssi/poista", methods=["POST"])
 def kurssi_poista():

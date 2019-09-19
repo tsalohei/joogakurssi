@@ -15,6 +15,12 @@
     {{form.kesto}}
     <input type="submit" value="lisää kurssi"/>
   </form>
+  <ul>
+      {% for error in form.kesto.errors %}
+      <li style="color:red;">{{ error }}</li>
+      {% endfor %}
+  </ul>
+  
 
 <h1>Muokkaa kursseja</h1>
 <table>

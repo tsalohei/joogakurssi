@@ -3,7 +3,6 @@ from application import app, db
 from flask import render_template, request, redirect, url_for
 from application.asiakas.models import Asiakas
 from application.asiakas.forms import AsiakasLomake
-from wtforms.validators import Length, ValidationError
 
 @app.route("/asiakas/")
 def asiakas_index():
