@@ -6,6 +6,13 @@
   </head>
 
   <body>
+      {% if current_user.is_authenticated %}
+      <p>
+	    Kirjautunut nimellä {{ (current_user.etunimi + " " + current_user.sukunimi) }}. <a href="{{ url_for('asiakas_logout') }}">Kirjaudu ulos</a>
+      </p>
+      {% else %}
+      <a href="{{ url_for('asiakas_login') }}">Kirjaudu (asiakas)</a>
+      {% endif %}
       <ul>
           <li><a href="{{ url_for('index') }}">Etusivulle</a></li>
           <li><a href="{{ url_for('asiakas_index') }}">Lista asiakkaista (ohjaajat)</a></li>

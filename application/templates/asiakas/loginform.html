@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{{ error }}
+<form method="POST" action="{{ url_for('asiakas_login') }}">
+  <table>
+    <tr>
+      <td>
+	{{ form.login.label }}
+      </td>
+      <td>
+	{{ form.login }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+	{{ form.salasana.label }}
+      </td>
+      <td>
+	{{ form.salasana }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+	<input type="submit" value="Kirjaudu"/>
+      </td>
+    </tr>
+</form>
+{% endblock %}
