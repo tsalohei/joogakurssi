@@ -1,11 +1,14 @@
 CREATE TABLE asiakas (
 	id INTEGER NOT NULL, 
+	date_created DATETIME, 
+	date_modified DATETIME, 
 	etunimi VARCHAR(144) NOT NULL, 
 	sukunimi VARCHAR(144) NOT NULL, 
 	login VARCHAR(144) NOT NULL, 
 	salasana VARCHAR(144) NOT NULL, 
 	PRIMARY KEY (id)
 )
+
 CREATE TABLE kurssi (
 	id INTEGER NOT NULL, 
 	kuvaus VARCHAR(144) NOT NULL, 
@@ -13,6 +16,7 @@ CREATE TABLE kurssi (
 	kesto INTEGER NOT NULL, 
 	PRIMARY KEY (id)
 )
+
 CREATE TABLE ohjaaja (
 	id INTEGER NOT NULL, 
 	etunimi VARCHAR(144) NOT NULL, 
