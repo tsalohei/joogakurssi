@@ -4,19 +4,27 @@
 
 <h1>Lista kursseista</h1>
 <table>
+    
     <tr>
         <th>Kurssin nimi</th>
+        <th>ohjaaja</th>
         <th>ajankohta</th>
-        <th>kesto</th>
+        <th>kesto (h)</th>
+        <th>ilmoittaudu</th>
         
     </tr>
     {% for x in kurssi %}
     <tr>
+    <form method="POST" action="{{ url_for('kurssi_ilmoittaudu', id=x.id) }}">
         <td>{{ x.kuvaus }}</td>
+        <td>{{ x.ohjaaja.etunimi }}</td>
         <td>{{ x.aika }}</td>
         <td>{{ x.kesto }}</td>
+        <td><input type="submit" value="ilmoittaudu"/></td>
+    </form>
     </tr>
+    
     {% endfor %}
 </table>
 
-{% endblock %}
+{% endblock %}  

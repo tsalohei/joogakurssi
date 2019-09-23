@@ -3,7 +3,9 @@ from flask import render_template, request, redirect, url_for
 from application.kurssi.models import Kurssi
 from application.kurssi.forms import KurssiLomake
 from application.ohjaaja.models import Ohjaaja 
+from application.asiakas.models import Asiakas, ilmoittautuminen
 import datetime
+from flask_login import login_required, current_user
 
 @app.route("/kurssi/")
 def kurssi_index():
@@ -50,8 +52,6 @@ def kurssi_create():
     kurssiform.ohjaaja.choices = tuplet
 
     return render_template("kurssi/uusi.html", kurssi = Kurssi.query.all(), form = kurssiform)
-    #return redirect(url_for("kurssi_index"))
-
 
 
 @app. route("/kurssi/muokkaa/<id>")
@@ -109,3 +109,17 @@ def kurssi_poista():
     db.session().commit()
 
     return redirect(url_for("kurssi_form"))
+
+@app. route("/kurssi/ilmoittaudu/<id>", methods=["POST"])
+def kurssi_ilmoittaudu(id):
+    testi_id = current_user.id 
+    a = Asiakas.query.get(testi_id) 
+    b = Kurssi.query.get(id)
+    a.ilmoittautuminen.append(b) 
+
+    db.session().add(a)
+    db.session().commit()
+
+    return render_template("index.html")
+    #return redirect(url_for("kurssi_form"))
+    

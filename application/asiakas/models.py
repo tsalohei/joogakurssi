@@ -1,8 +1,14 @@
 from application import db
 
+#) VOISIKO TÄÄ OLLA JOSSAIN MUUALLA, OMASSA KANSIOSSA ESIMERKIKSI?
+ilmoittautuminen = db.Table('ilmoittautuminen',
+    db.Column('asiakas_id', db.Integer, db.ForeignKey('asiakas.id'), primary_key=True),
+    db.Column('kurssi_id', db.Integer, db.ForeignKey('kurssi.id'), primary_key=True)
+)
+
 class Asiakas(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    #kaksi riviä alla lisätty
+    ilmoittautuminen = db.relationship('Kurssi', secondary=ilmoittautuminen, lazy='subquery', backref=db.backref('asiakkaat', lazy=True))
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
     etunimi = db.Column(db.String(144), nullable=False)
@@ -15,8 +21,7 @@ class Asiakas(db.Model):
         self.sukunimi = sukunimi
         self.login = login
         self.salasana = salasana
-
-    #lisätty nämä 4 metodia jotka flask-login haluaa  
+ 
     def get_id(self):
         return self.id
 
@@ -28,3 +33,5 @@ class Asiakas(db.Model):
 
     def is_authenticated(self):
         return True
+
+

@@ -12,13 +12,14 @@
       </p>
       {% else %}
       <a href="{{ url_for('asiakas_login') }}">Kirjaudu (asiakas)</a><br>
-      <a href="{{ url_for('ohjaaja_login') }}">Kirjaudu (ohjaaja)</a>
+      <a href="{{ url_for('ohjaaja_login') }}">Kirjaudu (ohjaaja)</a><br>
+      <a href="{{ url_for('asiakas_form') }}">Uusi asiakas: rekisteröidy täällä</a>
       {% endif %}
       <ul>
           <li><a href="{{ url_for('index') }}">Etusivulle</a></li>
           <li><a href="{{ url_for('asiakas_index') }}">Lista asiakkaista (ohjaajat)</a></li>
-          <li><a href="{{ url_for('asiakas_form') }}">Uusi asiakas</a></li>
-          <li><a href="{{ url_for('kurssi_index') }}">Lista kursseista</a></li>
+          <!--<li><a href="{{ url_for('asiakas_form') }}">Uusi asiakas</a></li>-->
+          <li><a href="{{ url_for('kurssi_index') }}">Ilmoittaudu kursseille (asiakas)</a></li>
           <li><a href="{{ url_for('kurssi_form') }}">Hallinnoi kursseja (ohjaajat)</a></li>
               </ul>
     {% block body %}

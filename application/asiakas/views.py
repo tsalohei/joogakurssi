@@ -43,3 +43,4 @@ def asiakas_login():
 
     login_user(asiakas)
     return redirect(url_for("index"))   
+
