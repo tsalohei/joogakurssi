@@ -16,7 +16,7 @@ class Asiakas(db.Model):
         self.login = login
         self.salasana = salasana
 
-    #lisätty nämä 4 metodia jotka flask-login haluaa
+    #lisätty nämä 4 metodia jotka flask-login haluaa  
     def get_id(self):
         return self.id
 

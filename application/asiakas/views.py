@@ -39,15 +39,7 @@ def asiakas_login():
     asiakas = Asiakas.query.filter_by(login=form.login.data, salasana=form.salasana.data).first()
     if not asiakas:
         return render_template("asiakas/loginform.html", form = form,
-                               error = "No such username or password")
+                               error = "Käyttäjää tai salasanaa ei löytynyt")
 
-    #voiko tän print-rivin poistaa?
-    print("Käyttäjä " + Asiakas.etunimi + " " + Asiakas.etunimi + " tunnistettiin")
     login_user(asiakas)
     return redirect(url_for("index"))   
-
-@app.route("/asiakas/logout")
-def asiakas_logout():
-    logout_user()
-    return redirect(url_for("index"))    
-

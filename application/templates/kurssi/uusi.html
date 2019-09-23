@@ -7,6 +7,8 @@
   
     {{form.kuvaus.label}}
     {{form.kuvaus}}
+    {{form.ohjaaja.label}}
+    {{form.ohjaaja}}
     {{form.pvm.label}}
     {{form.pvm}}
     {{form.kellonaika.label}}
@@ -25,6 +27,7 @@
 <table>
     <tr>
         <th>Kurssin nimi</th>
+        <th>ohjaaja</th>
         <th>ajankohta</th>
         <th>kesto</th>
         
@@ -32,6 +35,7 @@
     {% for x in kurssi %}
     <tr>
         <td>{{ x.kuvaus }}</td>
+        <td>{{ x.ohjaaja.etunimi }}</td>
         <td>{{ x.aika }}</td>
         <td>{{ x.kesto }}</td>
 

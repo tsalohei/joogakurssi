@@ -22,6 +22,9 @@ from application.kurssi import models
 from application.kurssi import views 
 
 from application.ohjaaja import models
+from application.ohjaaja import views 
+
+from application.auth import views 
 
 #kirjautuminen
 from application.asiakas.models import Asiakas
@@ -35,13 +38,9 @@ login_manager.init_app(app)
 login_manager.login_view = "asiakas_login"
 login_manager.login_message = "Kirjaudu käyttääksesi tätä toimintoa, kiitos."
 
-#toimiiko tämä?
+#asiakkaan logout-toiminto
 @login_manager.user_loader
 def load_user(asiakas_id):
     return Asiakas.query.get(asiakas_id)
-
-#@login_manager.user_loader
-#def load_user(user_id):
-#    return User.query.get(user_id)
 
 db.create_all()
