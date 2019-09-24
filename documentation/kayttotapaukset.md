@@ -1,9 +1,21 @@
 # Oleelliset käyttötapaukset
 
-* Asiakas rekisteröityy käyttäjäksi joogastudio Superjoogan kurssivarausjärjestelmään.
+* Joogakursseista kiinnostunut ihminen luo käyttäjätunnuksen ja salasanan, eli rekisteröityy asiakkaaksi joogastudio Superjoogan kurssivarausjärjestelmään.
 
-* Asiakas varaa paikan joogakurssilta.
+* Asiakas kirjautuu käyttäjätunnuksella sisään kurssivarausjärjestelmään.
 
-* Ohjaaja lisää joogakurssin valikoimaan.
+* Asiakas katselee tarjolla olevia joogakursseja ja varaa paikan haluamaltaan joogakurssilta.
 
-* Ohjaaja poistaa joogakurssin valikoimasta.
+* Asiakas kirjautuu ulos järjestelmästä.
+
+* Ohjaaja kirjautuu käyttäjätunnuksella sisään kurssivarausjärjestelmään (järjestelmä ei kata uusien ohjaajien rekisteröitymistä; nykyiset ohjaajat ovat valmiina tietokannassa).
+
+* Ohjaaja lisää uuden joogakurssin valikoimaan.
+
+* Ohjaaja muokkaa järjestelmässä olevan joogakurssin tietoja.
+
+* Ohjaaja poistaa joogakurssin järjestelmästä.
+
+* Ohjaaja tarkastelee joogakursseihin ja asiakkaisiin liittyviä tilastotietoja. (tämä on työn alla)
+
+* Ohjaaja kirjautuu ulos järjestelmästä.
