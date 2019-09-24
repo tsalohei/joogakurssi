@@ -8,7 +8,7 @@
 
 * Asiakas kirjautuu ulos järjestelmästä.
 
-* Ohjaaja kirjautuu käyttäjätunnuksella sisään kurssivarausjärjestelmään (järjestelmä ei kata uusien ohjaajien rekisteröitymistä; nykyiset ohjaajat ovat valmiina tietokannassa).
+* Ohjaaja kirjautuu käyttäjätunnuksella sisään kurssivarausjärjestelmään (järjestelmä ei kata uusien ohjaajien rekisteröitymistä; nykyiset ohjaajat on luotu komentoriviltä ja ovat valmiina tietokannassa).
 
 * Ohjaaja lisää uuden joogakurssin valikoimaan.
 
