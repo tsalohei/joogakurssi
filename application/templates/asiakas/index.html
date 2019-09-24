@@ -18,4 +18,20 @@
     {% endfor %}
 </table>
 
+
+{% if asiakkaan_kurssit is defined %}
+<p>
+  Asiakaskohtaiset kurssi-ilmoittautumiset:
+</p>
+
+<ul>
+  {% for user in asiakkaan_kurssit %}
+  <li>
+    {{asiakas.etunimi}} {{asiakas.sukunimi}} {{kurssi.kuvaus}}
+  </li>
+  {% endfor %}
+</ul>
+
+{% endif %}
+
 {% endblock %}

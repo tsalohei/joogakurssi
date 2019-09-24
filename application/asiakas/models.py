@@ -1,4 +1,5 @@
 from application import db
+from sqlalchemy.sql import text
 
 #) VOISIKO TÄÄ OLLA JOSSAIN MUUALLA, OMASSA KANSIOSSA ESIMERKIKSI?
 ilmoittautuminen = db.Table('ilmoittautuminen',
@@ -34,4 +35,17 @@ class Asiakas(db.Model):
     def is_authenticated(self):
         return True
 
+@staticmethod
+def asiakkaan_kurssit():
+    stmt = text("SELECT asiakas.etunimi, asiakas.sukunimi, kurssi.kuvaus FROM asiakas"
+                " LEFT JOIN ilmoittautuminen"
+                " ON asiakas.id = ilmoittautuminen.asiakas_id"
+                " LEFT JOIN kurssi"
+                " ON ilmoittautuminen.kurssi_id = kurssi.id")
+    res = db.engine.execute(stmt)
 
+    response = []
+    for row in res:
+        response.append({"Etunimi":row[0], "sukunimi":row[1],"kurssi":row[2]})
+
+    return response

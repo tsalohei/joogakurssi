@@ -6,6 +6,7 @@ from application.ohjaaja.models import Ohjaaja
 from application.asiakas.models import Asiakas, ilmoittautuminen
 import datetime
 from flask_login import login_required, current_user
+from sqlalchemy.sql import text
 
 @app.route("/kurssi/")
 @login_required
@@ -122,10 +123,14 @@ def kurssi_ilmoittaudu(id):
     testi_id = current_user.id 
     a = Asiakas.query.get(testi_id) 
     b = Kurssi.query.get(id)
+
+    #sallitaan vain yksi ilmoittautuminen per kurssi
+    #jos b on jo ilmoittautuminen-listassa, niin virheilmoitus
+    #pitäisikö tässäkin olla joku form?
+
     a.ilmoittautuminen.append(b) 
 
     db.session().add(a)
     db.session().commit()
 
     return render_template("index.html")
-    

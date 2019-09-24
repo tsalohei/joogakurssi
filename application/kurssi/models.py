@@ -1,5 +1,6 @@
 
 from application import db
+from sqlalchemy.sql import text
 
 class Kurssi(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -13,3 +14,8 @@ class Kurssi(db.Model):
         self.ohjaaja_id = ohjaaja
         self.aika = aika
         self.kesto = kesto
+
+    
+
+
+    

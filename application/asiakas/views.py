@@ -45,3 +45,6 @@ def asiakas_login():
     login_user(asiakas)
     return redirect(url_for("index"))   
 
+@app.route("/asiakas/")
+def kysely():
+    return render_template("asiakas/index.html", asiakkaan_kurssit=Asiakas.asiakkaan_kurssit())
