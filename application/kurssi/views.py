@@ -8,10 +8,12 @@ import datetime
 from flask_login import login_required, current_user
 
 @app.route("/kurssi/")
+@login_required
 def kurssi_index():
     return render_template("kurssi/index.html", kurssi = Kurssi.query.all())
 
 @app.route("/kurssi/uusi/")
+@login_required
 def kurssi_form():
     form = KurssiLomake()
 
@@ -24,6 +26,7 @@ def kurssi_form():
     return render_template("kurssi/uusi.html", kurssi = Kurssi.query.all(), form = form)
 
 @app.route("/kurssi/", methods=["POST"])
+@login_required
 def kurssi_create():
     form = KurssiLomake(request.form)
 
@@ -55,6 +58,7 @@ def kurssi_create():
 
 
 @app. route("/kurssi/muokkaa/<id>")
+@login_required
 def kurssi_muokkaa(id):
     m = Kurssi.query.get(id)
     form = KurssiLomake(obj=m)
@@ -73,6 +77,7 @@ def kurssi_muokkaa(id):
     return render_template("kurssi/muokkaa.html", form = form, id = m.id)
 
 @app. route("/kurssi/muokkaa/save/<id>", methods=["POST"]) 
+@login_required
 def kurssi_muokkaa_save(id):
     x = db.session.query(Kurssi).get(id)
     form = KurssiLomake(request.form) 
@@ -100,6 +105,7 @@ def kurssi_muokkaa_save(id):
     return redirect(url_for("kurssi_form"))
 
 @app. route("/kurssi/poista", methods=["POST"])
+@login_required
 def kurssi_poista():
     
     id = int(request.form.get("kurssi_id"))
@@ -111,6 +117,7 @@ def kurssi_poista():
     return redirect(url_for("kurssi_form"))
 
 @app. route("/kurssi/ilmoittaudu/<id>", methods=["POST"])
+@login_required
 def kurssi_ilmoittaudu(id):
     testi_id = current_user.id 
     a = Asiakas.query.get(testi_id) 
@@ -121,5 +128,4 @@ def kurssi_ilmoittaudu(id):
     db.session().commit()
 
     return render_template("index.html")
-    #return redirect(url_for("kurssi_form"))
     

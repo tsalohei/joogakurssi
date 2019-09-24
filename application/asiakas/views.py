@@ -1,11 +1,12 @@
 
 from flask import render_template, request, redirect, url_for
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 from application import app, db
 from application.asiakas.models import Asiakas
 from application.asiakas.forms import AsiakasLomake, AsiakasLoginLomake
 
 @app.route("/asiakas/")
+@login_required
 def asiakas_index():
     return render_template("asiakas/index.html", asiakas = Asiakas.query.all())
 
@@ -26,7 +27,7 @@ def asiakas_create():
     db.session().add(a)
     db.session().commit()
     
-    return redirect(url_for("asiakas_index"))
+    return render_template("index.html")
 
 
 @app.route("/asiakas/login", methods = ["GET", "POST"])
