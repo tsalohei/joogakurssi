@@ -16,6 +16,6 @@
 
 * Ohjaaja poistaa joogakurssin järjestelmästä.
 
-* Ohjaaja tarkastelee joogakursseihin ja asiakkaisiin liittyviä tilastotietoja. (tämä on työn alla)
+* Ohjaaja tarkastelee joogakursseihin ja asiakkaisiin liittyviä tilastotietoja. 
 
 * Ohjaaja kirjautuu ulos järjestelmästä.
