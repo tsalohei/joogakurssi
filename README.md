@@ -8,9 +8,8 @@ Käyttäjäryhmiä tässä tietokantasovelluksessa on kaksi: asiakas ja ohjaaja.
 
 Sovellusta pääsee kokeilemaan seuraavilla tunnuksilla: käyttäjänimi fifi, salasana 123. Näillä tunnuksilla pääsee kirjautumaan järjestelmään asiakkaana. 
 
-Varausjärjestelmän tietokantakaavio löytyy [täältä](https://github.com/tsalohei/joogakurssi/blob/master/documentation/tietokantakaavio1409.png). Tällä hetkellä tietokantakaaviossa on toisteisuutta asiakkaan ja ohjaajan kentissä, ja paremmin normalisoitu tietokantakaavio tullaan päivittämään tähän tiedostoon myöhemmin.
-
-Sovellus on suunniteltu toimimaan Firefox-selaimessa. 
+Varausjärjestelmän tietokantakaavio löytyy [täältä](https://github.com/tsalohei/joogakurssi/blob/master/documentation/tietokantakaavio2509.jpg). 
 
 Herokussa toimivan sovelluksen löydät [täältä](https://tsalohei-joogakurssi.herokuapp.com/).
 
+Sovellus on suunniteltu toimimaan Firefox-selaimessa. 

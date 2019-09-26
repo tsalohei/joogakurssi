@@ -24,10 +24,12 @@ from application.kurssi import views
 from application.ohjaaja import models
 from application.ohjaaja import views 
 
+from application.auth import models
 from application.auth import views 
 
-#kirjautuminen
-from application.asiakas.models import Asiakas
+
+#kirjautuminen 
+from application.auth.models import Kayttaja
 from os import urandom
 app.config["SECRET_KEY"] = urandom(32)
 
@@ -35,12 +37,12 @@ from flask_login import LoginManager
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-login_manager.login_view = "asiakas_login"
+login_manager.login_view = "kayttaja_login"
 login_manager.login_message = "Kirjaudu käyttääksesi tätä toimintoa, kiitos."
 
-#asiakkaan logout-toiminto
+#logout-toiminto
 @login_manager.user_loader
-def load_user(asiakas_id):
-    return Asiakas.query.get(asiakas_id)
+def load_user(kayttaja_id):
+    return Kayttaja.query.get(kayttaja_id)
 
 db.create_all()

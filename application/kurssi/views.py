@@ -4,25 +4,38 @@ from application.kurssi.models import Kurssi
 from application.kurssi.forms import KurssiLomake
 from application.ohjaaja.models import Ohjaaja 
 from application.asiakas.models import Asiakas, ilmoittautuminen
+from application.auth.models import Kayttaja
 import datetime
 from flask_login import login_required, current_user
 from sqlalchemy.sql import text
 
+def get_ohjaaja_tuplet():
+    lista = Ohjaaja.query.all()
+    tuplet = []
+    for ohjaaja in lista: 
+        x = Kayttaja.query.get(ohjaaja.kayttaja_id)
+        tuplet.append((ohjaaja.id, x.etunimi))
+    return tuplet
+
 @app.route("/kurssi/")
 @login_required
 def kurssi_index():
-    return render_template("kurssi/index.html", kurssi = Kurssi.query.all())
+    kurssit = Kurssi.query.all()
+    asiakas = Kayttaja.query.get(current_user.id).asiakas
+
+    if not asiakas.kurssit:
+        return render_template("kurssi/index.html", kurssi = kurssit, asiakas_kurssit=[])
+    else:    
+        asiakas_kurssit = asiakas.kurssit
+        voi_ilmoittautua = [x for x in kurssit if x not in asiakas_kurssit]
+        return render_template("kurssi/index.html", kurssi = voi_ilmoittautua, asiakas_kurssit = asiakas.kurssit)
 
 @app.route("/kurssi/uusi/")
 @login_required
 def kurssi_form():
     form = KurssiLomake()
 
-    lista = Ohjaaja.query.all()
-    tuplet = []
-    for ohjaaja in lista: 
-        tuplet.append((ohjaaja.id, ohjaaja.etunimi))
-    form.ohjaaja.choices = tuplet
+    form.ohjaaja.choices = get_ohjaaja_tuplet()
 
     return render_template("kurssi/uusi.html", kurssi = Kurssi.query.all(), form = form)
 
@@ -43,17 +56,14 @@ def kurssi_create():
     ajankohta = pvm.strftime('%Y-%m-%d') + " " + kellonaika.strftime('%H:%M')
     aika_dt = datetime.datetime.strptime(ajankohta, '%Y-%m-%d %H:%M')
 
-    k = Kurssi(form.kuvaus.data, form.ohjaaja.data, aika_dt, form.kesto.data)
+    k = Kurssi(form.kuvaus.data, ohjaaja_id, aika_dt, form.kesto.data)
   
     db.session().add(k)
     db.session().commit()
     
     kurssiform = KurssiLomake()
-    lista = Ohjaaja.query.all()
-    tuplet = []
-    for ohjaaja in lista: 
-        tuplet.append((ohjaaja.id, ohjaaja.etunimi))
-    kurssiform.ohjaaja.choices = tuplet
+    
+    kurssiform.ohjaaja.choices = get_ohjaaja_tuplet()
 
     return render_template("kurssi/uusi.html", kurssi = Kurssi.query.all(), form = kurssiform)
 
@@ -69,11 +79,7 @@ def kurssi_muokkaa(id):
     ohjaaja_id = request.form.get("ohjaaja")
     form.ohjaaja.choices = [(ohjaaja_id, ohjaaja_id)]
 
-    lista = Ohjaaja.query.all()
-    tuplet = []
-    for ohjaaja in lista: 
-        tuplet.append((ohjaaja.id, ohjaaja.etunimi))
-    form.ohjaaja.choices = tuplet
+    form.ohjaaja.choices = get_ohjaaja_tuplet()
 
     return render_template("kurssi/muokkaa.html", form = form, id = m.id)
 
@@ -119,18 +125,19 @@ def kurssi_poista():
 
 @app. route("/kurssi/ilmoittaudu/<id>", methods=["POST"])
 @login_required
-def kurssi_ilmoittaudu(id):
-    testi_id = current_user.id 
-    a = Asiakas.query.get(testi_id) 
-    b = Kurssi.query.get(id)
+def kurssi_ilmoittaudu(id):    
+    asiakas = Kayttaja.query.get(current_user.id).asiakas
+    kurssi = Kurssi.query.get(id)
 
-    #sallitaan vain yksi ilmoittautuminen per kurssi
-    #jos b on jo ilmoittautuminen-listassa, niin virheilmoitus
-    #pitäisikö tässäkin olla joku form?
+    asiakas.kurssit.append(kurssi) 
 
-    a.ilmoittautuminen.append(b) 
-
-    db.session().add(a)
+    db.session().add(asiakas)
     db.session().commit()
 
-    return render_template("index.html")
+    return redirect(url_for("kurssi_index"))
+
+
+@app. route("/kurssi/tilastot")
+@login_required
+def kurssi_tilastot():
+    return render_template("/kurssi/tilastot.html", asiakkaita_per_kurssi = Kurssi.asiakkaita_per_kurssi())

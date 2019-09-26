@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+
+<h1>Tilastoja</h1>
+<p>Tältä sivulta löytyy keskeisiä tilastoja joogastudio Superjoogan toiminnasta.</p>
+<h2>Asiakkaita per kurssi</h2>
+
+{% if asiakkaita_per_kurssi is defined %}
+
+
+
+<table>
+        <tr>
+            <th>Kurssin nimi</th>
+            <th>ajankohta</th>
+            <th>asiakkaita</th>
+        </tr>
+        {% for kurssi in asiakkaita_per_kurssi %}
+        <tr>
+            <td>{{ kurssi.kuvaus }}</td>
+            <td>{{ kurssi.aika }}</td>
+            <td>{{ kurssi.asiakkaita }}</td>
+        </tr>
+        {% endfor %}
+       
+</table>
+{% endif %}
+
+
+
+
+{% endblock %}
+
+
+
+<!--{% if asiakkaita_per_kurssi is defined %}
+<p>
+  Otsikko:
+</p>
+
+<ul>
+  {% for kurssi in asiakkaita_per_kurssi %}
+  <li>
+    {{kurssi.kuvaus}} {{kurssi.aika}} {{kurssi.asiakkaita}}
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+-->

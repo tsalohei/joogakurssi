@@ -1,16 +1,15 @@
-
 {% extends "layout.html" %}
-<!--  
+  
 {% block body %}
-<form method="POST" action="{{ url_for('asiakas_create') }}">
-  {{form.etunimi.label}}
-  {{form.etunimi}}
-  {{form.sukunimi.label}}
-  {{form.sukunimi}}
-  {{form.login.label}}
-  {{form.login}}
-  {{form.salasana.label}}
-  {{form.salasana}}  
+<form method="POST" action="{{ url_for('kayttaja_create') }}">
+  {{form.etunimi.label}}<br>
+  {{form.etunimi}} <br>
+  {{form.sukunimi.label}}<br>
+  {{form.sukunimi}}<br>
+  {{form.login.label}}<br>
+  {{form.login}}<br>
+  {{form.salasana.label}}<br>
+  {{form.salasana}}<br> <br>
   <input type="submit" value="Rekisteröidy"/> 
 </form>
 <ul>
@@ -31,5 +30,6 @@
     {% endfor %}
 </ul>
 
--->
+<p>Kun olet rekisteröitynyt, voit kirjautua sisään sivun oikeasta yläkulmasta.</p>
+
 {% endblock %}

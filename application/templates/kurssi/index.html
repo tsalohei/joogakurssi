@@ -2,7 +2,7 @@
   
 {% block body %}
 
-<h1>Lista kursseista</h1>
+<h1>Ilmoittaudu kursseille</h1>
 <table>
     
     <tr>
@@ -13,15 +13,27 @@
         <th>ilmoittaudu</th>
         
     </tr>
+
+    {% for x in asiakas_kurssit %}
+    <tr>
+        <td>{{ x.kuvaus }}</td>
+        <td>{{ x.ohjaaja.kayttaja.etunimi }}</td>
+        <td>{{ x.aika }}</td>
+        <td>{{ x.kesto }}</td>
+        <td>OK!</td>
+    </form>
+    </tr>
+    
+    {% endfor %}
+
     {% for x in kurssi %}
     <tr>
     <form method="POST" action="{{ url_for('kurssi_ilmoittaudu', id=x.id) }}">
         <td>{{ x.kuvaus }}</td>
-        <td>{{ x.ohjaaja.etunimi }}</td>
+        <td>{{ x.ohjaaja.kayttaja.etunimi }}</td>
         <td>{{ x.aika }}</td>
         <td>{{ x.kesto }}</td>
         <td><input type="submit" value="ilmoittaudu"/></td>
-        <!--ilmoittautuminen pitää rajoittaa yhteen kertaan-->
     </form>
     </tr>
     
