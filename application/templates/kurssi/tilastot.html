@@ -10,11 +10,11 @@
 
 
 
-<table>
+<table class="table">
         <tr>
-            <th>Kurssin nimi</th>
-            <th>ajankohta</th>
-            <th>asiakkaita</th>
+            <th scope="col">Kurssin nimi</th>
+            <th scope="col">ajankohta</th>
+            <th scope="col">asiakkaita</th>
         </tr>
         {% for kurssi in asiakkaita_per_kurssi %}
         <tr>
@@ -31,20 +31,3 @@
 
 
 {% endblock %}
-
-
-
-<!--{% if asiakkaita_per_kurssi is defined %}
-<p>
-  Otsikko:
-</p>
-
-<ul>
-  {% for kurssi in asiakkaita_per_kurssi %}
-  <li>
-    {{kurssi.kuvaus}} {{kurssi.aika}} {{kurssi.asiakkaita}}
-  </li>
-  {% endfor %}
-</ul>
-{% endif %}
--->

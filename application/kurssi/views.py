@@ -68,7 +68,7 @@ def kurssi_create():
     return render_template("kurssi/uusi.html", kurssi = Kurssi.query.all(), form = kurssiform)
 
 
-@app. route("/kurssi/muokkaa/<id>")
+@app.route("/kurssi/muokkaa/<id>")
 @login_required
 def kurssi_muokkaa(id):
     m = Kurssi.query.get(id)
@@ -83,7 +83,7 @@ def kurssi_muokkaa(id):
 
     return render_template("kurssi/muokkaa.html", form = form, id = m.id)
 
-@app. route("/kurssi/muokkaa/save/<id>", methods=["POST"]) 
+@app.route("/kurssi/muokkaa/save/<id>", methods=["POST"]) 
 @login_required
 def kurssi_muokkaa_save(id):
     x = db.session.query(Kurssi).get(id)
@@ -111,7 +111,7 @@ def kurssi_muokkaa_save(id):
 
     return redirect(url_for("kurssi_form"))
 
-@app. route("/kurssi/poista", methods=["POST"])
+@app.route("/kurssi/poista", methods=["POST"])
 @login_required
 def kurssi_poista():
     
@@ -123,7 +123,7 @@ def kurssi_poista():
 
     return redirect(url_for("kurssi_form"))
 
-@app. route("/kurssi/ilmoittaudu/<id>", methods=["POST"])
+@app.route("/kurssi/ilmoittaudu/<id>", methods=["POST"])
 @login_required
 def kurssi_ilmoittaudu(id):    
     asiakas = Kayttaja.query.get(current_user.id).asiakas
@@ -137,7 +137,7 @@ def kurssi_ilmoittaudu(id):
     return redirect(url_for("kurssi_index"))
 
 
-@app. route("/kurssi/tilastot")
+@app.route("/kurssi/tilastot")
 @login_required
 def kurssi_tilastot():
     return render_template("/kurssi/tilastot.html", asiakkaita_per_kurssi = Kurssi.asiakkaita_per_kurssi())

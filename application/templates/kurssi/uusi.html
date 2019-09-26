@@ -15,7 +15,7 @@
     {{form.kellonaika}}
     {{form.kesto.label}}
     {{form.kesto}}
-    <input type="submit" value="lisää kurssi"/>
+    <input class="btn btn-primary" type="submit" value="Lisää kurssi"/>
   </form>
   <ul>
       {% for error in form.kesto.errors %}
@@ -24,12 +24,12 @@
   </ul>
 
 <h1>Muokkaa kursseja</h1>
-<table>
+<table class="table">
     <tr>
-        <th>Kurssin nimi</th>
-        <th>ohjaaja</th>
-        <th>ajankohta</th>
-        <th>kesto</th>
+        <th scope="col">Kurssin nimi</th>
+        <th scope="col">ohjaaja</th>
+        <th scope="col">ajankohta</th>
+        <th scope="col">kesto</th>
         
     </tr>
     {% for x in kurssi %}
@@ -39,13 +39,12 @@
         <td>{{ x.aika }}</td>
         <td>{{ x.kesto }}</td>
 
-        <td><a href="{{ url_for('kurssi_muokkaa', id=x.id ) }}">Päivitä kurssin tietoja</a></td>
+        <td><a class="btn btn-primary" href="{{ url_for('kurssi_muokkaa', id=x.id ) }}">Päivitä kurssin tietoja</a></td>
 
         <td>
           <form method="POST" action="{{ url_for('kurssi_poista') }}">
             <input type ="hidden" name="kurssi_id" value ="{{x.id}}"/>
-
-            <input type="submit" value="poista kurssi"/>
+            <input class="btn btn-primary" type="submit" value="Poista kurssi"/>
           </form>
         </td>
     </tr>

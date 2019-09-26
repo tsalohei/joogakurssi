@@ -3,14 +3,14 @@
 {% block body %}
 
 <h1>Ilmoittaudu kursseille</h1>
-<table>
+<table class="table">
     
     <tr>
-        <th>Kurssin nimi</th>
-        <th>ohjaaja</th>
-        <th>ajankohta</th>
-        <th>kesto (h)</th>
-        <th>ilmoittaudu</th>
+        <th scope="col">Kurssin nimi</th>
+        <th scope="col">ohjaaja</th>
+        <th scope="col">ajankohta</th>
+        <th scope="col">kesto (h)</th>
+        <th scope="col">ilmoittaudu</th>
         
     </tr>
 
@@ -20,7 +20,7 @@
         <td>{{ x.ohjaaja.kayttaja.etunimi }}</td>
         <td>{{ x.aika }}</td>
         <td>{{ x.kesto }}</td>
-        <td>OK!</td>
+        <td><a class="btn btn-secondary" disabled href="#">Olet ilmoittautunut!</a></td>
     </form>
     </tr>
     
@@ -33,7 +33,7 @@
         <td>{{ x.ohjaaja.kayttaja.etunimi }}</td>
         <td>{{ x.aika }}</td>
         <td>{{ x.kesto }}</td>
-        <td><input type="submit" value="ilmoittaudu"/></td>
+        <td><input class="btn btn-primary" type="submit" value="Ilmoittaudu"/></td>
     </form>
     </tr>
     
