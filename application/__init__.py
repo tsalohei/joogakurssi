@@ -16,13 +16,11 @@ db = SQLAlchemy(app)
 from application import views
 
 from application.asiakas import models
-#from application.asiakas import views
 
 from application.kurssi import models
 from application.kurssi import views 
 
 from application.ohjaaja import models
-#from application.ohjaaja import views 
 
 from application.auth import models
 from application.auth import views 
