@@ -140,4 +140,5 @@ def kurssi_ilmoittaudu(id):
 @app.route("/kurssi/tilastot")
 @login_required
 def kurssi_tilastot():
-    return render_template("/kurssi/tilastot.html", asiakkaita_per_kurssi = Kurssi.asiakkaita_per_kurssi())
+    return render_template("/kurssi/tilastot.html", asiakkaita_per_kurssi = Kurssi.asiakkaita_per_kurssi(),
+    suosituimmat_kurssityypit = Kurssi.suosituimmat_kurssityypit())

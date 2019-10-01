@@ -38,6 +38,23 @@ class Kurssi(db.Model):
             response.append({"kuvaus":row[0], "aika":row[1], "asiakkaita":row[2]})
         return response
 
+    @staticmethod
+    def suosituimmat_kurssityypit():
+        stmt = text("SELECT kurssi.kuvaus, COUNT(asiakas.id) as asiakkaita FROM kurssi"
+        " LEFT JOIN ilmoittautuminen"
+        " ON kurssi.id = ilmoittautuminen.kurssi_id"
+        " LEFT JOIN asiakas"
+        " ON ilmoittautuminen.asiakas_id = asiakas.id"
+        " GROUP BY kurssi.kuvaus"
+        " ORDER BY asiakkaita DESC")
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"kuvaus":row[0], "asiakkaita":row[1]})
+        return response
+        
+
 
     
 

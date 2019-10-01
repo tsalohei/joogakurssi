@@ -7,9 +7,6 @@
 <h2>Asiakkaita per kurssi</h2>
 
 {% if asiakkaita_per_kurssi is defined %}
-
-
-
 <table class="table">
         <tr>
             <th scope="col">Kurssin nimi</th>
@@ -27,7 +24,22 @@
 </table>
 {% endif %}
 
-
+<h2>Suosituimmat kurssityypit</h2>
+{% if suosituimmat_kurssityypit is defined %}
+<table class="table">
+        <tr>
+            <th scope="col">Kurssin tyyppi</th>
+            <th scope="col">asiakkaita</th>
+        </tr>
+        {% for kurssi in suosituimmat_kurssityypit %}
+        <tr>
+            <td>{{ kurssi.kuvaus }}</td>
+            <td>{{ kurssi.asiakkaita }}</td>
+        </tr>
+        {% endfor %}
+       
+</table>
+{% endif %}
 
 
 {% endblock %}
