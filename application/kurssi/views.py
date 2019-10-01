@@ -1,4 +1,4 @@
-from application import app, db
+from application import app, db, login_required
 from flask import render_template, request, redirect, url_for
 from application.kurssi.models import Kurssi
 from application.kurssi.forms import KurssiLomake
@@ -6,7 +6,8 @@ from application.ohjaaja.models import Ohjaaja
 from application.asiakas.models import Asiakas, ilmoittautuminen
 from application.auth.models import Kayttaja
 import datetime
-from flask_login import login_required, current_user
+#alla olevasta siirretty login_required applicationiin
+from flask_login import current_user
 from sqlalchemy.sql import text
 
 def get_ohjaaja_tuplet():
@@ -18,7 +19,7 @@ def get_ohjaaja_tuplet():
     return tuplet
 
 @app.route("/kurssi/")
-@login_required
+@login_required()
 def kurssi_index():
     kurssit = Kurssi.query.all()
     asiakas = Kayttaja.query.get(current_user.id).asiakas
@@ -31,7 +32,7 @@ def kurssi_index():
         return render_template("kurssi/index.html", kurssi = voi_ilmoittautua, asiakas_kurssit = asiakas.kurssit)
 
 @app.route("/kurssi/uusi/")
-@login_required
+@login_required(required_role="ADMIN")
 def kurssi_form():
     form = KurssiLomake()
 
@@ -40,7 +41,7 @@ def kurssi_form():
     return render_template("kurssi/uusi.html", kurssi = Kurssi.query.all(), form = form)
 
 @app.route("/kurssi/", methods=["POST"])
-@login_required
+@login_required(required_role="ADMIN")
 def kurssi_create():
     form = KurssiLomake(request.form)
 
@@ -69,7 +70,7 @@ def kurssi_create():
 
 
 @app.route("/kurssi/muokkaa/<id>")
-@login_required
+@login_required(required_role="ADMIN")
 def kurssi_muokkaa(id):
     m = Kurssi.query.get(id)
     form = KurssiLomake(obj=m)
@@ -84,7 +85,7 @@ def kurssi_muokkaa(id):
     return render_template("kurssi/muokkaa.html", form = form, id = m.id)
 
 @app.route("/kurssi/muokkaa/save/<id>", methods=["POST"]) 
-@login_required
+@login_required(required_role="ADMIN")
 def kurssi_muokkaa_save(id):
     x = db.session.query(Kurssi).get(id)
     form = KurssiLomake(request.form) 
@@ -112,7 +113,7 @@ def kurssi_muokkaa_save(id):
     return redirect(url_for("kurssi_form"))
 
 @app.route("/kurssi/poista", methods=["POST"])
-@login_required
+@login_required(required_role="ADMIN")
 def kurssi_poista():
     
     id = int(request.form.get("kurssi_id"))
@@ -124,7 +125,7 @@ def kurssi_poista():
     return redirect(url_for("kurssi_form"))
 
 @app.route("/kurssi/ilmoittaudu/<id>", methods=["POST"])
-@login_required
+@login_required()
 def kurssi_ilmoittaudu(id):    
     asiakas = Kayttaja.query.get(current_user.id).asiakas
     kurssi = Kurssi.query.get(id)
@@ -138,7 +139,7 @@ def kurssi_ilmoittaudu(id):
 
 
 @app.route("/kurssi/tilastot")
-@login_required
+@login_required(required_role="ADMIN")
 def kurssi_tilastot():
     return render_template("/kurssi/tilastot.html", asiakkaita_per_kurssi = Kurssi.asiakkaita_per_kurssi(),
     suosituimmat_kurssityypit = Kurssi.suosituimmat_kurssityypit())
