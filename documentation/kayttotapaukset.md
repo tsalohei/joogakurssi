@@ -4,7 +4,7 @@
 
 * Asiakas kirjautuu käyttäjätunnuksella sisään kurssivarausjärjestelmään.
 
-* Asiakas katselee tarjolla olevia joogakursseja ja varaa paikan haluamaltaan joogakurssilta.
+* Asiakas katselee tarjolla olevia joogakursseja ja ilmoittautuu haluamalleen joogakurssille (ohjaajat eivät voi ilmoittautua kursseille). 
 
 * Asiakas kirjautuu ulos järjestelmästä.
 
