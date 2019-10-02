@@ -11,8 +11,8 @@ class KurssiLomake(FlaskForm):
     ("seniori", "seniori"), ("nauru", "nauru"), ("äitiys", "äitiys")])
     pvm = DateField("päivämäärä", [validators.InputRequired()])
     kellonaika = TimeField("kellonaika", [validators.InputRequired()])
-    kesto = IntegerField("kesto (h)", [validators.NumberRange(min=1, max=None, 
-    message="Kurssin keston tulee olla vähintään 1 tunti")])
+    kesto = IntegerField("kesto (h)", [validators.NumberRange(min=1, max=8, 
+    message="Kurssin keston tulee olla vähintään 1 tunti ja korkeintaan 8 tuntia")])
     
     class Meta:
         csrf = False
