@@ -6,7 +6,7 @@ Joogakurssi on kertaluontoinen opetustapahtuma. Yhdellä kurssilla on yksi opett
 
 Käyttäjäryhmiä tässä tietokantasovelluksessa on kaksi: asiakas ja ohjaaja. Käyttötapaukset löytyvät [täältä](https://github.com/tsalohei/joogakurssi/blob/master/documentation/kayttotapaukset.md).
 
-Sovellusta pääsee kokeilemaan seuraavilla tunnuksilla: käyttäjänimi fifi, salasana 123. Näillä tunnuksilla pääsee kirjautumaan järjestelmään asiakkaana. 
+Sovellusta pääsee kokeilemaan asiakkaan roolissa seuraavilla tunnuksilla: käyttäjänimi "fifi", salasana "123". Järjestelmään voi luoda myös oman käyttäjätunnuksen ja salasanan. Ohjaajan roolissa sovellukseen pääsee tutustumaan käyttäjänimellä "taina" ja salasanalla "sala".
 
 Varausjärjestelmän tietokantakaavio löytyy [täältä](https://github.com/tsalohei/joogakurssi/blob/master/documentation/tietokantakaavio2509.jpg). 
 
