@@ -1,4 +1,4 @@
-#Käyttöohje
+# Käyttöohje
 
 Joogakursseista kiinnostunut henkilö pääsee rekisteröitymään käyttäjäksi (asiakkaaksi) sovelluksen yläpalkista löytyvästä linkistä "Rekisteröidy". Tämän jälkeen asiakas voi kirjautua sisään oikeasta yläkulmasta löytyvän "kirjaudu"-linkin kautta. 
 
@@ -8,4 +8,4 @@ Ohjaajat tulee lisätä järjestelmään suoraan PostgreSQL-tietokannanhallintaj
 
 Kirjauduttuaan sisään ohjaajalle ilmestyvät yläpalkkiin näkyviin toiminnot "hallinnoi kursseja" sekä "tilastot". Ensimmäisen linkin kautta ohjaaja pääsee lisäämään uusia kursseja sekä muokkaamaan olemassaolevien kurssien tietoja. Tilastot-linkin kautta pääsee tarkastelemaan joogastudion toimintaan liittyviä keskeisiä tilastotietoja.
 
-#Asennusohje
+# Asennusohje

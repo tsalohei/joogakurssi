@@ -21,7 +21,7 @@
 * Ohjaaja kirjautuu ulos järjestelmästä.
 
 
-#Käyttötapauksiin liittyvät SQL-kyselyt (samassa järjestyksessä kuin yllä)
+# Käyttötapauksiin liittyvät SQL-kyselyt (samassa järjestyksessä kuin yllä)
 
 * Joogakursseista kiinnostunut ihminen luo käyttäjätunnuksen ja salasanan, eli rekisteröityy asiakkaaksi joogastudio Superjoogan kurssivarausjärjestelmään.
 
