@@ -6,7 +6,6 @@ from application.ohjaaja.models import Ohjaaja
 from application.asiakas.models import Asiakas, ilmoittautuminen
 from application.auth.models import Kayttaja
 import datetime
-#alla olevasta siirretty login_required applicationiin
 from flask_login import current_user
 from sqlalchemy.sql import text
 
@@ -62,12 +61,7 @@ def kurssi_create():
     db.session().add(k)
     db.session().commit()
     
-    kurssiform = KurssiLomake()
-    
-    kurssiform.ohjaaja.choices = get_ohjaaja_tuplet()
-
-    return render_template("kurssi/uusi.html", kurssi = Kurssi.query.all(), form = kurssiform)
-
+    return redirect(url_for("kurssi_form"))
 
 @app.route("/kurssi/muokkaa/<id>")
 @login_required(required_role="ADMIN")

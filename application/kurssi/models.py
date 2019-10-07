@@ -40,7 +40,7 @@ class Kurssi(db.Model):
 
     @staticmethod
     def suosituimmat_kurssityypit():
-        stmt = text("SELECT kurssi.kuvaus, COUNT(asiakas.id) as asiakkaita FROM kurssi"
+        stmt = text("SELECT kurssi.kuvaus, COUNT(asiakas.id) AS asiakkaita FROM kurssi"
         " LEFT JOIN ilmoittautuminen"
         " ON kurssi.id = ilmoittautuminen.kurssi_id"
         " LEFT JOIN asiakas"
