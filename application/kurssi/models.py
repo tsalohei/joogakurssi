@@ -39,7 +39,7 @@ class Kurssi(db.Model):
 
         response = []
         for row in res:
-            response.append({"kuvaus":row[0], "ohjaaja":row[1], "aika":row[2][0:16], "kesto":row[3], "asiakkaita":row[4]})
+            response.append({"kuvaus":row[0], "ohjaaja":row[1], "aika":row[2].strftime('%Y-%m-%d %H:%M'), "kesto":row[3], "asiakkaita":row[4]})
         return response
 
 
