@@ -26,20 +26,20 @@ class Kurssi(db.Model):
     def asiakkaita_per_kurssi():
         stmt = text("SELECT kurssi.kuvaus, kayttaja.etunimi, kurssi.aika, kurssi.kesto, COUNT(asiakas.id)"
         " FROM kurssi"
-        " INNER JOIN kayttaja"
-        " ON ohjaaja.kayttaja_id = kayttaja.id"
         " INNER JOIN ohjaaja"
         " ON kurssi.ohjaaja_id = ohjaaja.id"
+        " INNER JOIN kayttaja"
+        " ON ohjaaja.kayttaja_id = kayttaja.id"
         " LEFT JOIN ilmoittautuminen"
         " ON ilmoittautuminen.kurssi_id = kurssi.id"
         " LEFT JOIN asiakas"
         " ON ilmoittautuminen.asiakas_id = asiakas.id"
-        " GROUP BY kurssi.kuvaus, kurssi.aika")
+        " GROUP BY kurssi.kuvaus, kurssi.aika, kayttaja.etunimi, kurssi.kesto")
         res = db.engine.execute(stmt)
 
         response = []
         for row in res:
-            response.append({"kuvaus":row[0], "ohjaaja":row[1], "aika":row[2], "kesto":row[3], "asiakkaita":row[4]})
+            response.append({"kuvaus":row[0], "ohjaaja":row[1], "aika":row[2][0:16], "kesto":row[3], "asiakkaita":row[4]})
         return response
 
 
