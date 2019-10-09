@@ -39,8 +39,19 @@ class Kurssi(db.Model):
 
         response = []
         for row in res:
-            response.append({"kuvaus":row[0], "ohjaaja":row[1], "aika":row[2].strftime('%Y-%m-%d %H:%M'), "kesto":row[3], "asiakkaita":row[4]})
+            aikaMuokattu = row[2]
+            if type(aikaMuokattu) is not str:
+                aikaMuokattu = aikaMuokattu.strftime('%Y-%m-%d %H:%M')
+            else:
+                aikaMuokattu = aikaMuokattu[0:16]
+            response.append({"kuvaus":row[0], "ohjaaja":row[1], "aika":aikaMuokattu, "kesto":row[3], "asiakkaita":row[4]})
         return response
+        
+        
+        #response = []
+        #for row in res:
+        #    response.append({"kuvaus":row[0], "ohjaaja":row[1], "aika":row[2].strftime('%Y-%m-%d %H:%M'), "kesto":row[3], "asiakkaita":row[4]})
+        #return response
 
 
     @staticmethod
