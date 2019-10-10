@@ -2,7 +2,7 @@
 
 * Joogakursseista kiinnostunut ihminen luo käyttäjätunnuksen ja salasanan, eli rekisteröityy asiakkaaksi joogastudio Superjoogan kurssivarausjärjestelmään.
 
-INSERT INTO kayttaja (date_created, date_modified, etunimi, sukunimi, login, salasana, is_admin) VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?);
+    INSERT INTO kayttaja (date_created, date_modified, etunimi, sukunimi, login, salasana, is_admin) VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?);
 
 INSERT INTO asiakas (asiakkaan_kayttaja_id) VALUES (?);
 
