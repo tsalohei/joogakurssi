@@ -1,3 +1,3 @@
 # Jatkokehitysideat
 
-Ohjaajalle voisi toteuttaa mahdollisuuden hallinnoida asiakkaita: luoda uusia asiakkaita, muokata asiakkaiden tietoja, ja poistaa asiakkaita.
+* Kun ohjaaja poistaa kurssin, sovellus voisi välittää tiedon kurssin peruuntumisesta niille asiakkaille, jotka olivat jo ehtineet ilmoittautua ko. kurssille. Jos tieto välitettäisiin esim. sähköpostitse, tulisi rekisteröitymisen yhteydessä pyytää asiakkailta sähköpostiosoitetta. Vastaavasti asiakas-tietokantatauluun tulisi lisätä sarake sähköpostiosoitetta varten.
