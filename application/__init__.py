@@ -20,14 +20,13 @@ app.config["SECRET_KEY"] = urandom(32)
 
 from flask_login import LoginManager, current_user
 login_manager = LoginManager()
-#TÄHÄN ALLE OHJEISSA VAIHTUNUT INIT->SETUP_APP  
+ 
 login_manager.init_app(app)
 
 login_manager.login_view = "kayttaja_login"
 login_manager.login_message = "Kirjaudu käyttääksesi tätä toimintoa, kiitos."
 
-#ROOLIT kirjautumisessa
-
+#roolit kirjautumisessa
 from functools import wraps
 
 def login_required(required_role="ASIAKAS"):
