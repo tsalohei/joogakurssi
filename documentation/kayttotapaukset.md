@@ -2,14 +2,16 @@
 
 * Joogakursseista kiinnostunut ihminen luo käyttäjätunnuksen ja salasanan, eli rekisteröityy asiakkaaksi joogastudio Superjoogan kurssivarausjärjestelmään.
 
-        INSERT INTO kayttaja (date_created, date_modified, etunimi, sukunimi, login, salasana, is_admin) VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?);
+        INSERT INTO kayttaja (date_created, date_modified, etunimi, sukunimi, login, salasana, is_admin
+        VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?);
 
         INSERT INTO asiakas (asiakkaan_kayttaja_id) VALUES (?);
 
 
 * Asiakas kirjautuu käyttäjätunnuksella sisään kurssivarausjärjestelmään. 
 
-        SELECT kayttaja.id, kayttaja.date_created, kayttaja.date_modified, kayttaja.etunimi, kayttaja.sukunimi, kayttaja.login, kayttaja.salasana, kayttaja.is_admin 
+        SELECT kayttaja.id, kayttaja.date_created, kayttaja.date_modified, kayttaja.etunimi,  
+        kayttaja.sukunimi, kayttaja.login, kayttaja.salasana, kayttaja.is_admin 
         FROM kayttaja 
         WHERE kayttaja.id = ?;
 
@@ -22,10 +24,14 @@
 
 * Asiakas katselee tietoa siitä, mille joogakursseille on jo (mahdollisesti) ilmoittautunut.
 
-        SELECT kurssi.id AS kurssi_id, kurssi.ohjaaja_id AS kurssi_ohjaaja_id, kurssi.kuvaus AS kurssi_kuvaus, kurssi.aika AS kurssi_aika, kurssi.kesto AS kurssi_kesto, anon_1.asiakas_id AS anon_1_asiakas_id 
-        FROM (SELECT asiakas.id AS asiakas_id 
-        FROM asiakas 
-        WHERE ? = asiakas.asiakkaan_kayttaja_id) AS anon_1 JOIN ilmoittautuminen AS ilmoittautuminen_1 ON anon_1.asiakas_id = ilmoittautuminen_1.asiakas_id JOIN kurssi ON kurssi.id = ilmoittautuminen_1.kurssi_id ORDER BY anon_1.asiakas_id;
+        SELECT kurssi.id AS kurssi_id, kurssi.ohjaaja_id AS kurssi_ohjaaja_id, kurssi.kuvaus 
+        AS kurssi_kuvaus, kurssi.aika AS kurssi_aika, kurssi.kesto AS kurssi_kesto, 
+        anon_1.asiakas_id AS anon_1_asiakas_id 
+        FROM (SELECT asiakas.id AS asiakas_id FROM asiakas 
+        WHERE ? = asiakas.asiakkaan_kayttaja_id) AS anon_1 
+        JOIN ilmoittautuminen AS ilmoittautuminen_1 
+        ON anon_1.asiakas_id = ilmoittautuminen_1.asiakas_id JOIN kurssi 
+        ON kurssi.id = ilmoittautuminen_1.kurssi_id ORDER BY anon_1.asiakas_id;
 
 * Asiakas ilmoittautuu haluamalleen joogakurssille. 
 
@@ -34,14 +40,18 @@
 
 * Asiakas kirjautuu ulos järjestelmästä.
 
-        SELECT kayttaja.id, kayttaja.date_created, kayttaja.date_modified, kayttaja.etunimi, kayttaja.sukunimi, kayttaja.login, kayttaja.salasana, kayttaja.is_admin 
+        SELECT kayttaja.id, kayttaja.date_created, kayttaja.date_modified, 
+        kayttaja.etunimi, kayttaja.sukunimi, kayttaja.login, kayttaja.salasana, 
+        kayttaja.is_admin 
         FROM kayttaja 
         WHERE kayttaja.id = ?;
 
 
 * Ohjaaja kirjautuu käyttäjätunnuksella sisään kurssivarausjärjestelmään. (Järjestelmä ei kata uusien ohjaajien rekisteröitymistä; nykyiset ohjaajat on luotu komentoriviltä ja ovat valmiina tietokannassa.) 
 
-        SELECT kayttaja.id, kayttaja.date_created, kayttaja.date_modified, kayttaja.etunimi, kayttaja.sukunimi, kayttaja.login, kayttaja.salasana, kayttaja.is_admin 
+        SELECT kayttaja.id, kayttaja.date_created, kayttaja.date_modified, 
+        kayttaja.etunimi, kayttaja.sukunimi, kayttaja.login, kayttaja.salasana, 
+        kayttaja.is_admin 
         FROM kayttaja 
         WHERE kayttaja.id = ?;
 
@@ -60,12 +70,18 @@
 
         SELECT asiakas.id, asiakas.asiakkaan_kayttaja_id 
         FROM asiakas, ilmoittautuminen 
-        WHERE ? = ilmoittautuminen.kurssi_id AND asiakas.id = ilmoittautuminen.asiakas_id;
+        WHERE ? = ilmoittautuminen.kurssi_id 
+        AND asiakas.id = ilmoittautuminen.asiakas_id;
 
-        SELECT kurssi.id AS kurssi_id, kurssi.ohjaaja_id AS kurssi_ohjaaja_id, kurssi.kuvaus AS kurssi_kuvaus, kurssi.aika AS kurssi_aika, kurssi.kesto AS kurssi_kesto, anon_1.asiakas_id AS anon_1_asiakas_id 
+        SELECT kurssi.id AS kurssi_id, kurssi.ohjaaja_id AS kurssi_ohjaaja_id, 
+        kurssi.kuvaus AS kurssi_kuvaus, kurssi.aika AS kurssi_aika, 
+        kurssi.kesto AS kurssi_kesto, anon_1.asiakas_id AS anon_1_asiakas_id 
         FROM (SELECT asiakas.id AS asiakas_id 
         FROM asiakas, ilmoittautuminen 
-        WHERE ? = ilmoittautuminen.kurssi_id AND asiakas.id = ilmoittautuminen.asiakas_id) AS anon_1 JOIN ilmoittautuminen AS ilmoittautuminen_1 ON anon_1.asiakas_id = ilmoittautuminen_1.asiakas_id JOIN kurssi ON kurssi.id = ilmoittautuminen_1.kurssi_id ORDER BY anon_1.asiakas_id;
+        WHERE ? = ilmoittautuminen.kurssi_id AND asiakas.id = ilmoittautuminen.asiakas_id) 
+        AS anon_1 
+        JOIN ilmoittautuminen AS ilmoittautuminen_1 
+        ON anon_1.asiakas_id = ilmoittautuminen_1.asiakas_id JOIN kurssi ON kurssi.id = ilmoittautuminen_1.kurssi_id ORDER BY anon_1.asiakas_id;
 
         DELETE FROM ilmoittautuminen WHERE ilmoittautuminen.asiakas_id = ? 
         AND ilmoittautuminen.kurssi_id = ?;
@@ -102,6 +118,8 @@
 
 * Ohjaaja kirjautuu ulos järjestelmästä.
 
-        SELECT kayttaja.id, kayttaja.date_created, kayttaja.date_modified, kayttaja.etunimi, kayttaja.sukunimi, kayttaja.login, kayttaja.salasana, kayttaja.is_admin 
+        SELECT kayttaja.id, kayttaja.date_created, kayttaja.date_modified, 
+        kayttaja.etunimi, kayttaja.sukunimi, kayttaja.login, kayttaja.salasana, 
+        kayttaja.is_admin 
         FROM kayttaja 
         WHERE kayttaja.id = ?;
