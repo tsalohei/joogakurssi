@@ -14,15 +14,27 @@ Kirjauduttuaan sisään ohjaajalle ilmestyvät yläpalkkiin näkyviin toiminnot 
 
 Hanki työvälineet Python-kehitysympäristöä varten: Pythonin versio 3, Pythonin pip apukirjastojen lataamiseen, Pythonin venv-kirjasto, työvälineet gitin käyttöön, Visual Studio Code tai muu ohjelmointiympäristö sekä Github-käyttäjätunnus. Käytössäsi tulee olla myös SQLite.
 
-Suorita seuraavat komennot (suluissa selitys):
+Suorita alla olevat komennot.
 
-    git clone https://github.com/tsalohei/joogakurssi.git (kopioi sovellus)
-    python3 -m venv venv (luo virtuaaliympäristö venv)
-    source venv/bin/activate (aktivoi virtuaaliympäristö)
-    pip install -r requirements.txt (lataa riippuvuudet requirements.txt-tiedostosta)
-    python3 run.py (käynnistä sovellus)
+Kopioi sovellus:
 
-Tämän jälkeen voit avata sovelluksen osoitteessa: http://localhost:5000/
+    git clone https://github.com/tsalohei/joogakurssi.git 
+
+Luo virtuaaliympäristö venv:
+
+    python3 -m venv venv 
+
+Aktivoi virtuaaliympäristö:
+
+    source venv/bin/activate 
+
+Lataa riippuvuudet requirements.txt-tiedostosta:
+
+    pip install -r requirements.txt ()
+
+Käynnistä sovellus:
+
+    python3 run.py 
 
 
 ### Ohjaajien lisääminen
@@ -39,19 +51,39 @@ Seuraavaksi lisätään ohjaaja-tauluun rivi siten, että sarake kayttaja_id saa
 
     INSERT INTO ohjaaja (kayttaja_id, tuntipalkka) VALUES (?, ?);
 
+Tämän jälkeen voit avata sovelluksen Firefox-selaimella osoitteessa: http://localhost:5000/
 
 ## Sovelluksen asentaminen niin, että se toimii pilvessä (Herokussa)
 
 Paikalliseen asentamiseen tarvittavien työkalujen lisäksi tarvitset PostgreSQL-tietokannanhallintajärjestelmän, työvälineet Heroku-pilvipalvelun käyttöön (Heroku CLI) sekä käyttäjätunnuksen Herokuun.
 
-Suorita seuraavat komennot (suluissa selitys):
+Suorita alla olevat komennot.
 
-    heroku create joku-kiva-nimi (luo sovellukselle paikka Herokuun)
-    git remote add heroku https://git.heroku.com/joku-kiva-nimi.git (lisää paikalliseen versionhallintaan tieto tieto Herokusta)
-    git push heroku master (lähetä projekti Herokuun)
-    heroku config:set HEROKU=1 (lisää sovelluksen käyttöön tieto, että sovellus on Herokussa)
-    heroku addons:add heroku-postgresql:hobby-dev (lisää Herokuun tietokanta)
+Luo sovellukselle paikka Herokuun:
+
+    heroku create joku-kiva-nimi 
+
+Lisää paikalliseen versionhallintaan tieto Herokusta:
+
+    git remote add heroku https://git.heroku.com/joku-kiva-nimi.git 
+
+Lähetä projekti Herokuun:
+
+    git push heroku master 
+
+Lisää sovelluksen käyttöön tieto, että sovellus on Herokussa:
+
+    heroku config:set HEROKU=1 
+
+Lisää Herokuun tietokanta:
+
+    heroku addons:add heroku-postgresql:hobby-dev 
+
 
 ### Ohjaajien lisääminen
 
-Ohjaajien lisääminen tietokantaan tapahtuu kuten yllä paikallisesti, mutta käyttäen PostgreSQL-tietokannanhallintajärjestelmää. Kirjautuminen Herokun PostgeSQL-tietokantaan tapahtuu komennolla heroku pg:psql.
+Ohjaajien lisääminen tietokantaan tapahtuu kuten yllä paikallisesti, mutta käyttäen PostgreSQL-tietokannanhallintajärjestelmää. Kirjautuminen Herokun PostgeSQL-tietokantaan tapahtuu seuraavalla komennolla:
+
+    heroku pg:psql.
+
+Sovellus löytyy nyt osoitteesta https://joku-kiva-nimi.herokuapp.com/
