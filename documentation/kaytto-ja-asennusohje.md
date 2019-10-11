@@ -36,6 +36,7 @@ Käynnistä sovellus:
 
     python3 run.py 
 
+Tämän jälkeen voit avata sovelluksen Firefox-selaimella osoitteessa: http://localhost:5000/
 
 ### Ohjaajien lisääminen
 
@@ -51,7 +52,6 @@ Seuraavaksi lisätään ohjaaja-tauluun rivi siten, että sarake kayttaja_id saa
 
     INSERT INTO ohjaaja (kayttaja_id, tuntipalkka) VALUES (?, ?);
 
-Tämän jälkeen voit avata sovelluksen Firefox-selaimella osoitteessa: http://localhost:5000/
 
 ## Sovelluksen asentaminen niin, että se toimii pilvessä (Herokussa)
 
@@ -79,6 +79,8 @@ Lisää Herokuun tietokanta:
 
     heroku addons:add heroku-postgresql:hobby-dev 
 
+Sovellus löytyy nyt osoitteesta https://joku-kiva-nimi.herokuapp.com/
+
 
 ### Ohjaajien lisääminen
 
@@ -86,4 +88,4 @@ Ohjaajien lisääminen tietokantaan tapahtuu kuten yllä paikallisesti, mutta k�
 
     heroku pg:psql.
 
-Sovellus löytyy nyt osoitteesta https://joku-kiva-nimi.herokuapp.com/
+
