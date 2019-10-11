@@ -42,7 +42,7 @@ Tämän jälkeen voit avata sovelluksen Firefox-selaimella osoitteessa: http://l
 
 Ohjaajat lisätään järjestelmään suoraan tietokannanhallintajärjestelmän (SQLite) kautta. Tähän liittyy rivien lisääminen kahteen tietokantatauluun. Ensin lisätään kayttaja-tauluun rivi:
 
-    INSERT INTO kayttaja (etunimi, sukunimi, login, salasana, is_admin) VALUES (?, ?, ?, ?, 't');
+    INSERT INTO kayttaja (etunimi, sukunimi, login, salasana, is_admin) VALUES (?, ?, ?, ?, '1');
 
 Tietokannanhallintajärjestelmä luo käyttäjälle automaattisesti pääavaimen eli id:n. Otetaan talteen id-sarakkeen arvo riviltä, joka täsmää juuri luotuun kayttajaan: 
 
@@ -84,8 +84,12 @@ Sovellus löytyy nyt osoitteesta https://joku-kiva-nimi.herokuapp.com/
 
 ### Ohjaajien lisääminen
 
-Ohjaajien lisääminen tietokantaan tapahtuu kuten yllä paikallisesti, mutta käyttäen PostgreSQL-tietokannanhallintajärjestelmää. Kirjautuminen Herokun PostgeSQL-tietokantaan tapahtuu seuraavalla komennolla:
+Ohjaajien lisääminen tietokantaan tapahtuu käyttäen PostgreSQL-tietokannanhallintajärjestelmää. Kirjautuminen Herokun PostgeSQL-tietokantaan tapahtuu seuraavalla komennolla:
 
     heroku pg:psql.
+
+Ohjaajien lisääminen tapahtuu muuten samalla tavalla kuin paikallisesti, mutta kun lisäät rivin tauluun kayttaja, saa muuttuja is_admin arvoksi 't' eikä '1' niikuin SQLitessä:
+
+    INSERT INTO kayttaja (etunimi, sukunimi, login, salasana, is_admin) VALUES (?, ?, ?, ?, 't');
 
 
