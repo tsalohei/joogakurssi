@@ -41,7 +41,7 @@ class Kurssi(db.Model):
         for row in res:
             aikaMuokattu = row[2]
             if type(aikaMuokattu) is not str:
-                aikaMuokattu = aikaMuokattu.strftime('%Y-%m-%d %H:%M')
+                aikaMuokattu = aikaMuokattu.strftime('%d.%m.%y klo %H.%M')
             else:
                 aikaMuokattu = aikaMuokattu[0:16]
             response.append({"kuvaus":row[0], "ohjaaja":row[1], "aika":aikaMuokattu, "kesto":row[3], "asiakkaita":row[4]})

@@ -36,7 +36,7 @@
     <tr>
         <td>{{ x.kuvaus }}</td>
         <td>{{ x.ohjaaja.kayttaja.etunimi }}</td>
-        <td>{{ x.aika.strftime('%Y-%m-%d %H:%M') }}</td>
+        <td>{{ x.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
         <td>{{ x.kesto }}</td>
 
         <td><a class="btn btn-primary" href="{{ url_for('kurssi_muokkaa', id=x.id ) }}">Päivitä kurssin tietoja</a></td>
