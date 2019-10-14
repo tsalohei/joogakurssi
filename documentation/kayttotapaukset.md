@@ -1,6 +1,12 @@
 # Oleelliset käyttötapaukset ja niihin liittyvät SQL-kyselyt
 
-* Joogakursseista kiinnostunut ihminen luo käyttäjätunnuksen ja salasanan, eli rekisteröityy asiakkaaksi joogastudio Superjoogan kurssivarausjärjestelmään.
+* Joogakursseista kiinnostunut ihminen katselee joogastudio Superjoogan kurssivalikoimaa.
+
+        SELECT kurssi.id, kurssi.ohjaaja_id, kurssi.kuvaus, kurssi.aika, kurssi.kesto
+        FROM kurssi
+
+
+* Joogakursseista kiinnostunut ihminen luo käyttäjätunnuksen ja salasanan, eli rekisteröityy asiakkaaksi kurssivarausjärjestelmään.
 
         INSERT INTO kayttaja (date_created, date_modified, etunimi, sukunimi, login, salasana, is_admin
         VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?);
