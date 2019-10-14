@@ -3,7 +3,7 @@
 * Joogakursseista kiinnostunut ihminen katselee joogastudio Superjoogan kurssivalikoimaa.
 
         SELECT kurssi.id, kurssi.ohjaaja_id, kurssi.kuvaus, kurssi.aika, kurssi.kesto
-        FROM kurssi
+        FROM kurssi;
 
 
 * Joogakursseista kiinnostunut ihminen luo käyttäjätunnuksen ja salasanan, eli rekisteröityy asiakkaaksi kurssivarausjärjestelmään.
