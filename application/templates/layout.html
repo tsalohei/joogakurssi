@@ -22,6 +22,12 @@
                     <a class="nav-link" href="{{ url_for('kayttaja_form') }} ">Rekisteröidy</a>
                 </li>
                 {% endif %}
+                </li>
+                {% if not current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('kurssi_selaa') }} ">Kurssitarjonta</a>
+                </li>
+                {% endif %}
                 {% if current_user.is_authenticated and not current_user.is_admin %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('kurssi_index') }} ">Ilmoittaudu kursseille</a>

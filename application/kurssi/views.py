@@ -137,3 +137,9 @@ def kurssi_ilmoittaudu(id):
 def kurssi_tilastot():
     return render_template("/kurssi/tilastot.html", asiakkaita_per_kurssi = Kurssi.asiakkaita_per_kurssi(),
     suosituimmat_kurssityypit = Kurssi.suosituimmat_kurssityypit())
+
+
+@app.route("/kurssi/kurssitarjonta")
+def kurssi_selaa():
+    kurssit = Kurssi.query.all()
+    return render_template("/kurssi/kurssitarjonta.html", kurssit = kurssit)
