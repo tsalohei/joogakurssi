@@ -14,7 +14,7 @@
         
     </tr>
 
-    {% for kurssi in asiakas_kurssit |sort(attribute='aika')|sort(attribute='kuvaus') %}
+    {% for kurssi in asiakkaan_ilmoittautumiset |sort(attribute='aika')|sort(attribute='kuvaus') %}
     <tr>
         <td>{{ kurssi.kuvaus }}</td>
         <td>{{ kurssi.ohjaaja.kayttaja.etunimi }}</td>

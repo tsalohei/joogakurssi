@@ -127,21 +127,18 @@ def kurssi_ilmoittaudu(id):
 @app.route("/kurssi/")
 @login_required()
 def kurssi_index():
-    #kurssit = Kurssi.query.all()
     kurssit = Kurssi.query.filter(Kurssi.aika >= datetime.datetime.now())
     asiakas = Kayttaja.query.get(current_user.id).asiakas
 
     if not asiakas.kurssit:
-        return render_template("kurssi/index.html", kurssit = kurssit, asiakas_kurssit=[])
+        return render_template("kurssi/index.html", kurssit = kurssit, asiakkaan_ilmoittautumiset=[])
     else:    
-        #asiakas_kurssit: pitäisi saada valittua vain tulevaisuudessa olevat
-        #asiakas_kurssit = asiakas.kurssit
-        asiakas_kurssit = asiakas.kurssit
-        asiakas_kurssit = [x for x in asiakas_kurssit if x.aika >= datetime.datetime.now()]
+        asiakkaan_ilmoittautumiset = asiakas.kurssit
+        asiakkaan_ilmoittautumiset = [kurssi for kurssi in asiakkaan_ilmoittautumiset if kurssi.aika >= datetime.datetime.now()]
 
-        voi_ilmoittautua = [x for x in kurssit if x not in asiakas_kurssit]
+        voi_ilmoittautua = [kurssi for kurssi in kurssit if kurssi not in asiakkaan_ilmoittautumiset]
         
-        return render_template("kurssi/index.html", kurssit = voi_ilmoittautua, asiakas_kurssit = asiakas_kurssit)
+        return render_template("kurssi/index.html", kurssit = voi_ilmoittautua, asiakkaan_ilmoittautumiset = asiakkaan_ilmoittautumiset)
 
 #tilastot
 
