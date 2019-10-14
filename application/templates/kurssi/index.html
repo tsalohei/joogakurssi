@@ -14,25 +14,25 @@
         
     </tr>
 
-    {% for x in asiakas_kurssit |sort(attribute='aika')|sort(attribute='kuvaus') %}
+    {% for kurssi in asiakas_kurssit |sort(attribute='aika')|sort(attribute='kuvaus') %}
     <tr>
-        <td>{{ x.kuvaus }}</td>
-        <td>{{ x.ohjaaja.kayttaja.etunimi }}</td>
-        <td>{{ x.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
-        <td>{{ x.kesto }}</td>
+        <td>{{ kurssi.kuvaus }}</td>
+        <td>{{ kurssi.ohjaaja.kayttaja.etunimi }}</td>
+        <td>{{ kurssi.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
+        <td>{{ kurssi.kesto }}</td>
         <td><a class="btn btn-secondary" disabled href="#">Olet ilmoittautunut!</a></td>
     </form>
     </tr>
     
     {% endfor %}
 
-    {% for x in kurssi |sort(attribute='aika')|sort(attribute='kuvaus') %}
+    {% for kurssi in kurssit |sort(attribute='aika')|sort(attribute='kuvaus') %}
     <tr>
-    <form method="POST" action="{{ url_for('kurssi_ilmoittaudu', id=x.id) }}">
-        <td>{{ x.kuvaus }}</td>
-        <td>{{ x.ohjaaja.kayttaja.etunimi }}</td>
-        <td>{{ x.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
-        <td>{{ x.kesto }}</td>
+    <form method="POST" action="{{ url_for('kurssi_ilmoittaudu', id=kurssi.id) }}">
+        <td>{{ kurssi.kuvaus }}</td>
+        <td>{{ kurssi.ohjaaja.kayttaja.etunimi }}</td>
+        <td>{{ kurssi.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
+        <td>{{ kurssi.kesto }}</td>
         <td><input class="btn btn-primary" type="submit" value="Ilmoittaudu"/></td>
     </form>
     </tr>
