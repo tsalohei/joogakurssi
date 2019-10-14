@@ -14,7 +14,7 @@
         
     </tr>
 
-    {% for x in asiakas_kurssit %}
+    {% for x in asiakas_kurssit |sort(attribute='aika')|sort(attribute='kuvaus') %}
     <tr>
         <td>{{ x.kuvaus }}</td>
         <td>{{ x.ohjaaja.kayttaja.etunimi }}</td>
@@ -26,7 +26,7 @@
     
     {% endfor %}
 
-    {% for x in kurssi %}
+    {% for x in kurssi |sort(attribute='aika')|sort(attribute='kuvaus') %}
     <tr>
     <form method="POST" action="{{ url_for('kurssi_ilmoittaudu', id=x.id) }}">
         <td>{{ x.kuvaus }}</td>
