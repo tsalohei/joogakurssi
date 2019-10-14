@@ -17,8 +17,6 @@ def get_ohjaaja_tuplet():
         tuplet.append((ohjaaja.id, x.etunimi))
     return tuplet
 
-
-
 #uuden kurssin luominen
 
 @app.route("/kurssi/uusi/")
@@ -126,7 +124,6 @@ def kurssi_ilmoittaudu(id):
 
     return redirect(url_for("kurssi_index"))
 
-
 @app.route("/kurssi/")
 @login_required()
 def kurssi_index():
@@ -152,5 +149,5 @@ def kurssi_tilastot():
 
 @app.route("/kurssi/kurssitarjonta")
 def kurssi_selaa():
-    kurssit = Kurssi.query.all()
+    kurssit = Kurssi.query.filter(Kurssi.aika >= datetime.datetime.now())
     return render_template("/kurssi/kurssitarjonta.html", kurssit = kurssit)
