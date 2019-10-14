@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
   
-{% block body %}
+{% block body %} 
+<p style="color:red;">{{ error }}</p>
 <form method="POST" action="{{ url_for('kayttaja_create') }}">
   {{form.etunimi.label}}<br>
   {{form.etunimi}} <br>
@@ -30,5 +31,4 @@
     {% endfor %}
 </ul>
 
-
-{% endblock %}
+{% endblock %} 

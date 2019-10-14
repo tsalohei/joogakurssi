@@ -16,20 +16,24 @@ def kayttaja_create():
     if not form.validate():
         return render_template("auth/uusi.html", form = form)
 
-    k = Kayttaja(form.etunimi.data, form.sukunimi.data, form.login.data, 
-    form.salasana.data, is_admin=False)
+    ei_validi_kayttaja = Kayttaja.query.filter_by(login=form.login.data, salasana=form.salasana.data).first()
+    if ei_validi_kayttaja:
+        return render_template("auth/uusi.html", form = form, error = "Käyttäjätunnus on varattu, valitse toinen käyttäjätunnus!")
+    else:
+        k = Kayttaja(form.etunimi.data, form.sukunimi.data, form.login.data, 
+        form.salasana.data, is_admin=False)
 
-    db.session().add(k)
-    db.session().commit()
- 
-    kayttaja_nyt = Kayttaja.query.filter_by(login=form.login.data, salasana=form.salasana.data).first()
-
-    a = Asiakas(asiakkaan_kayttaja_id = kayttaja_nyt.id)
-
-    db.session().add(a)
-    db.session().commit()
+        db.session().add(k)
+        db.session().commit()
     
-    return render_template("auth/loginform.html", form = LoginLomake())
+        kayttaja_nyt = Kayttaja.query.filter_by(login=form.login.data, salasana=form.salasana.data).first()
+
+        a = Asiakas(asiakkaan_kayttaja_id = kayttaja_nyt.id)
+
+        db.session().add(a)
+        db.session().commit()
+        
+        return render_template("auth/loginform.html", form = LoginLomake())
 
 @app.route("/kayttaja/logout")
 def kayttaja_logout():
@@ -47,7 +51,39 @@ def kayttaja_login():
     kayttaja = Kayttaja.query.filter_by(login=form.login.data, salasana=form.salasana.data).first()
     if not kayttaja:
         return render_template("auth/loginform.html", form = form,
-                               error = "Käyttäjää tai salasanaa ei löytynyt")
+                               error = "Käyttäjätunnusta tai salasanaa ei löytynyt")
 
     login_user(kayttaja)
     return redirect(url_for("index"))  
+
+
+
+
+
+
+
+
+
+    #@app.route("/kayttaja/", methods=["POST"])
+    #def kayttaja_create():
+    #form = KayttajaLomake(request.form)
+
+    #if not form.validate():
+    #    return render_template("auth/uusi.html", form = form)
+
+    #tässä validoi ettei samalla käyttäjänimellä ei voi luoda uutta tiliä
+
+    #k = Kayttaja(form.etunimi.data, form.sukunimi.data, form.login.data, 
+    #form.salasana.data, is_admin=False)
+
+    #db.session().add(k)
+    #db.session().commit()
+ 
+    #kayttaja_nyt = Kayttaja.query.filter_by(login=form.login.data, salasana=form.salasana.data).first()
+
+    #a = Asiakas(asiakkaan_kayttaja_id = kayttaja_nyt.id)
+
+    #db.session().add(a)
+    #db.session().commit()
+    
+    #return render_template("auth/loginform.html", form = LoginLomake())
