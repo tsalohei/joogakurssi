@@ -17,18 +17,9 @@ def get_ohjaaja_tuplet():
         tuplet.append((ohjaaja.id, x.etunimi))
     return tuplet
 
-@app.route("/kurssi/")
-@login_required()
-def kurssi_index():
-    kurssit = Kurssi.query.all()
-    asiakas = Kayttaja.query.get(current_user.id).asiakas
 
-    if not asiakas.kurssit:
-        return render_template("kurssi/index.html", kurssi = kurssit, asiakas_kurssit=[])
-    else:    
-        asiakas_kurssit = asiakas.kurssit
-        voi_ilmoittautua = [x for x in kurssit if x not in asiakas_kurssit]
-        return render_template("kurssi/index.html", kurssi = voi_ilmoittautua, asiakas_kurssit = asiakas.kurssit)
+
+#uuden kurssin luominen
 
 @app.route("/kurssi/uusi/")
 @login_required(required_role="ADMIN")
@@ -62,6 +53,8 @@ def kurssi_create():
     db.session().commit()
     
     return redirect(url_for("kurssi_form"))
+
+#kurssin muokkaaminen
 
 @app.route("/kurssi/muokkaa/<id>")
 @login_required(required_role="ADMIN")
@@ -118,6 +111,8 @@ def kurssi_poista():
 
     return redirect(url_for("kurssi_form"))
 
+#kurssille ilmoittautuminen
+
 @app.route("/kurssi/ilmoittaudu/<id>", methods=["POST"])
 @login_required()
 def kurssi_ilmoittaudu(id):    
@@ -132,12 +127,28 @@ def kurssi_ilmoittaudu(id):
     return redirect(url_for("kurssi_index"))
 
 
+@app.route("/kurssi/")
+@login_required()
+def kurssi_index():
+    kurssit = Kurssi.query.all()
+    asiakas = Kayttaja.query.get(current_user.id).asiakas
+
+    if not asiakas.kurssit:
+        return render_template("kurssi/index.html", kurssi = kurssit, asiakas_kurssit=[])
+    else:    
+        asiakas_kurssit = asiakas.kurssit
+        voi_ilmoittautua = [x for x in kurssit if x not in asiakas_kurssit]
+        return render_template("kurssi/index.html", kurssi = voi_ilmoittautua, asiakas_kurssit = asiakas.kurssit)
+
+#tilastot
+
 @app.route("/kurssi/tilastot")
 @login_required(required_role="ADMIN")
 def kurssi_tilastot():
     return render_template("/kurssi/tilastot.html", asiakkaita_per_kurssi = Kurssi.asiakkaita_per_kurssi(),
     suosituimmat_kurssityypit = Kurssi.suosituimmat_kurssityypit())
 
+#kurssitarjonta (näytetään ei-kirjautuneelle käyttäjälle)
 
 @app.route("/kurssi/kurssitarjonta")
 def kurssi_selaa():
