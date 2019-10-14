@@ -29,7 +29,8 @@ def kayttaja_create():
     db.session().add(a)
     db.session().commit()
     
-    return render_template("index.html")
+    #return render_template("index.html")
+    return render_template("auth/loginform.html", form = LoginLomake())
 
 @app.route("/kayttaja/logout")
 def kayttaja_logout():
