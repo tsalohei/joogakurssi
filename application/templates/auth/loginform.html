@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-{{ error }}
+<p style="color:red;">{{ error }}</p>
 <form method="POST" action="{{ url_for('kayttaja_login') }}">
   <table>
     <tr>
