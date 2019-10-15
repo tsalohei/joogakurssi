@@ -32,18 +32,18 @@
         <th scope="col">kesto (h)</th>
         
     </tr>
-    {% for x in kurssi |sort(attribute='aika')|sort(attribute='kuvaus') %}
+    {% for kurssi in kurssit |sort(attribute='aika')|sort(attribute='kuvaus') %}
     <tr>
-        <td>{{ x.kuvaus }}</td>
-        <td>{{ x.ohjaaja.kayttaja.etunimi }}</td>
-        <td>{{ x.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
-        <td>{{ x.kesto }}</td>
+        <td>{{ kurssi.kuvaus }}</td>
+        <td>{{ kurssi.ohjaaja.kayttaja.etunimi }}</td>
+        <td>{{ kurssi.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
+        <td>{{ kurssi.kesto }}</td>
 
-        <td><a class="btn btn-primary" href="{{ url_for('kurssi_muokkaa', id=x.id ) }}">Päivitä kurssin tietoja</a></td>
+        <td><a class="btn btn-primary" href="{{ url_for('kurssi_muokkaa', id=kurssi.id ) }}">Päivitä kurssin tietoja</a></td>
 
         <td>
           <form method="POST" action="{{ url_for('kurssi_poista') }}">
-            <input type ="hidden" name="kurssi_id" value ="{{x.id}}"/>
+            <input type ="hidden" name="kurssi_id" value ="{{kurssi.id}}"/>
             <input class="btn btn-primary" type="submit" value="Poista kurssi"/>
           </form>
         </td>

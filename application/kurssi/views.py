@@ -26,7 +26,10 @@ def kurssi_form():
 
     form.ohjaaja.choices = get_ohjaaja_tuplet()
 
-    return render_template("kurssi/uusi.html", kurssi = Kurssi.query.all(), form = form)
+    kurssit = Kurssi.query.filter(Kurssi.aika >= datetime.datetime.now())
+    #Kurssi.query.filter(Kurssi.aika >= datetime.datetime.now())
+    #return render_template("kurssi/uusi.html", kurssi = Kurssi.query.all(), form = form)
+    return render_template("kurssi/uusi.html", kurssit = kurssit, form = form)
 
 @app.route("/kurssi/", methods=["POST"])
 @login_required(required_role="ADMIN")
