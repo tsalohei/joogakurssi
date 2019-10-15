@@ -4,6 +4,7 @@ from application import app, db
 from application.auth.models import Kayttaja
 from application.auth.forms import KayttajaLomake, LoginLomake
 from application.asiakas.models import Asiakas 
+from flask_login import current_user
 
 @app.route("/kayttaja/uusi/")
 def kayttaja_form():
@@ -54,36 +55,8 @@ def kayttaja_login():
                                error = "Käyttäjätunnusta tai salasanaa ei löytynyt")
 
     login_user(kayttaja)
-    return redirect(url_for("kurssi_index"))
-
-
-
-
-
-
-
-
-
-    #@app.route("/kayttaja/", methods=["POST"])
-    #def kayttaja_create():
-    #form = KayttajaLomake(request.form)
-
-    #if not form.validate():
-    #    return render_template("auth/uusi.html", form = form)
-
-    #tässä validoi ettei samalla käyttäjänimellä ei voi luoda uutta tiliä
-
-    #k = Kayttaja(form.etunimi.data, form.sukunimi.data, form.login.data, 
-    #form.salasana.data, is_admin=False)
-
-    #db.session().add(k)
-    #db.session().commit()
- 
-    #kayttaja_nyt = Kayttaja.query.filter_by(login=form.login.data, salasana=form.salasana.data).first()
-
-    #a = Asiakas(asiakkaan_kayttaja_id = kayttaja_nyt.id)
-
-    #db.session().add(a)
-    #db.session().commit()
     
-    #return render_template("auth/loginform.html", form = LoginLomake())
+    if current_user.is_admin:
+        return redirect(url_for("index"))
+    else:
+        return redirect(url_for("kurssi_index"))
