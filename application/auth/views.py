@@ -17,7 +17,7 @@ def kayttaja_create():
     if not form.validate():
         return render_template("auth/uusi.html", form = form)
 
-    ei_validi_kayttaja = Kayttaja.query.filter_by(login=form.login.data, salasana=form.salasana.data).first()
+    ei_validi_kayttaja = Kayttaja.query.filter_by(login=form.login.data).first()
     if ei_validi_kayttaja:
         return render_template("auth/uusi.html", form = form, error = "Käyttäjätunnus on varattu, valitse toinen käyttäjätunnus!")
     else:
