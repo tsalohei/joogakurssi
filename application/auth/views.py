@@ -54,7 +54,7 @@ def kayttaja_login():
                                error = "Käyttäjätunnusta tai salasanaa ei löytynyt")
 
     login_user(kayttaja)
-    return redirect(url_for("index"))  
+    return redirect(url_for("kurssi_index"))
 
 
 
