@@ -21,6 +21,8 @@
         <td>{{ kurssi.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
         <td>{{ kurssi.kesto }}</td>
         <td><a class="btn btn-secondary" disabled href="#">Olet ilmoittautunut!</a></td>
+        <form method="POST" action="{{ url_for('peruuta_ilmoittautuminen', id=kurssi.id) }}">
+        <td><input class="btn btn-primary" type="submit" value="Peruuta ilmoittautuminen"/></td>
     </form>
     </tr>
     

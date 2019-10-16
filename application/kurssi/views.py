@@ -37,18 +37,23 @@ def kurssi_create():
     ohjaaja_id = request.form.get("ohjaaja")
     form.ohjaaja.choices = [(ohjaaja_id, ohjaaja_id)]
 
-    if not form.validate():
-        return render_template("kurssi/uusi.html", form = form, kurssi = Kurssi.query.all())
-
     pvm = form.pvm.data
+
+    if not form.validate() or pvm < datetime.date.today():
+        if pvm < datetime.date.today():
+            form.pvm.errors = [ "Kurssin päivämäärän tulee olla tulevaisuudessa."]
+        form.ohjaaja.choices = get_ohjaaja_tuplet()
+        kurssit = Kurssi.query.filter(Kurssi.aika >= datetime.datetime.now())
+        return render_template("kurssi/uusi.html", form = form, kurssit = kurssit)
+
     kellonaika = form.kellonaika.data    
 
     ajankohta = pvm.strftime('%Y-%m-%d') + " " + kellonaika.strftime('%H:%M')
     aika_dt = datetime.datetime.strptime(ajankohta, '%Y-%m-%d %H:%M')
 
-    k = Kurssi(form.kuvaus.data, ohjaaja_id, aika_dt, form.kesto.data)
+    kurssi = Kurssi(form.kuvaus.data, ohjaaja_id, aika_dt, form.kesto.data)
   
-    db.session().add(k)
+    db.session().add(kurssi)
     db.session().commit()
     
     return redirect(url_for("kurssi_form"))
@@ -58,41 +63,41 @@ def kurssi_create():
 @app.route("/kurssi/muokkaa/<id>")
 @login_required(required_role="ADMIN")
 def kurssi_muokkaa(id):
-    m = Kurssi.query.get(id)
-    form = KurssiLomake(obj=m)
-    form.pvm.data = m.aika
-    form.kellonaika.data = m.aika
+    kurssi = Kurssi.query.get(id)
+    form = KurssiLomake(obj=kurssi)
+    form.pvm.data = kurssi.aika
+    form.kellonaika.data = kurssi.aika
 
     ohjaaja_id = request.form.get("ohjaaja")
     form.ohjaaja.choices = [(ohjaaja_id, ohjaaja_id)]
 
     form.ohjaaja.choices = get_ohjaaja_tuplet()
 
-    return render_template("kurssi/muokkaa.html", form = form, id = m.id)
+    return render_template("kurssi/muokkaa.html", form = form, id = kurssi.id)
 
 @app.route("/kurssi/muokkaa/save/<id>", methods=["POST"]) 
 @login_required(required_role="ADMIN")
 def kurssi_muokkaa_save(id):
-    x = db.session.query(Kurssi).get(id)
+    kurssi = db.session.query(Kurssi).get(id)
     form = KurssiLomake(request.form) 
 
     ohjaaja_id = request.form.get("ohjaaja")
     form.ohjaaja.choices = [(ohjaaja_id, ohjaaja_id)]
 
     if not form.validate():
-        return render_template("kurssi/muokkaa.html", form = form, id = x.id)
+        return render_template("kurssi/muokkaa.html", form = form, id = kurssi.id)
     
-    x.kuvaus = form.kuvaus.data
+    kurssi.kuvaus = form.kuvaus.data
     
-    x.ohjaaja_id = form.ohjaaja.data
+    kurssi.ohjaaja_id = form.ohjaaja.data
 
     pvm = form.pvm.data
     kellonaika = form.kellonaika.data 
     ajankohta = pvm.strftime('%Y-%m-%d') + " " + kellonaika.strftime('%H:%M')
     aika_dt = datetime.datetime.strptime(ajankohta, '%Y-%m-%d %H:%M')
-    x.aika = aika_dt
+    kurssi.aika = aika_dt
 
-    x.kesto = form.kesto.data
+    kurssi.kesto = form.kesto.data
 
     db.session.commit()
 
@@ -103,9 +108,9 @@ def kurssi_muokkaa_save(id):
 def kurssi_poista():
     
     id = int(request.form.get("kurssi_id"))
-    x = Kurssi.query.get(id) 
+    kurssi = Kurssi.query.get(id) 
 
-    db.session().delete(x)
+    db.session().delete(kurssi)
     db.session().commit()
 
     return redirect(url_for("kurssi_form"))
@@ -141,11 +146,31 @@ def kurssi_index():
         
         return render_template("kurssi/index.html", kurssit = voi_ilmoittautua, asiakkaan_ilmoittautumiset = asiakkaan_ilmoittautumiset)
 
+#ilmoittautumisen peruuttaminen
+
+@app.route("/kurssi/peruuta/<id>", methods=["POST"])
+@login_required()
+def peruuta_ilmoittautuminen(id):    
+    asiakas = Kayttaja.query.get(current_user.id).asiakas
+    kurssi = Kurssi.query.get(id)
+
+    asiakas.kurssit.remove(kurssi)
+
+    db.session.add(asiakas)
+    db.session().commit()
+
+    return redirect(url_for("kurssi_index"))
+
 #tilastot
 
 @app.route("/kurssi/tilastot")
 @login_required(required_role="ADMIN")
 def kurssi_tilastot():
+    #PAGING
+    # from flask import request
+    # page = request.args.get('page')
+    # asiakkaita = Kurssi.asiakkaita_per_kurssi()[]
+    #sivutus. Ota osa listasta mukaan.
     return render_template("/kurssi/tilastot.html", asiakkaita_per_kurssi = Kurssi.asiakkaita_per_kurssi(),
     suosituimmat_kurssityypit = Kurssi.suosituimmat_kurssityypit())
 

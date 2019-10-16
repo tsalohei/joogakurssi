@@ -4,9 +4,8 @@ from wtforms import PasswordField
 from wtforms.fields.html5 import DateField, TimeField
 from wtforms import SelectField,IntegerField, validators
 
-
 class KurssiLomake(FlaskForm):
-    ohjaaja = SelectField("ohjaaja") 
+    ohjaaja = SelectField("ohjaaja")
     kuvaus = SelectField("kuvaus", choices=[("alkeis", "alkeis"), ("jatko", "jatko"), 
     ("seniori", "seniori"), ("nauru", "nauru"), ("äitiys", "äitiys")])
     pvm = DateField("päivämäärä", [validators.InputRequired()])
