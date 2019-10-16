@@ -25,6 +25,13 @@ def kurssi_form():
     form = KurssiLomake()
 
     form.ohjaaja.choices = get_ohjaaja_tuplet()
+    #form.ohjaaja.choices = [(current_user.etunimi, current_user.etunimi)]
+    #ylläolevan käyttö rikkoi tietokannan, eli tee niin että saa ohjaaja-olion
+
+    #myöskään tämä allaoleva ei toiminut ("Kayttaja is not iterable") 
+    #kirjautunut_ohjaaja= Kayttaja.query.get(current_user.id).ohjaaja
+    #kirjautuneen_ohjaajan_etunimi = Kayttaja.query.get(current_user).etunimi 
+    #form.ohjaaja.choices = [(kirjautunut_ohjaaja.id, kirjautuneen_ohjaajan_etunimi)]
 
     kurssit = Kurssi.query.filter(Kurssi.aika >= datetime.datetime.now())
     return render_template("kurssi/uusi.html", kurssit = kurssit, form = form)
