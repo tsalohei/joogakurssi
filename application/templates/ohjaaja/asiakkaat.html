@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+
+<h1>Asiakkaat</h1>
+<p>Tässä on lista joogastudio Superjoogan asiakkaista. Voit muokata asiakkaiden tietoja ja poistaa käyttäjätilejä.</p>
+
+
+<table class="table">
+        <tr>
+            <th scope="col">Etunimi</th>
+            <th scope="col">sukunimi</th>
+            <th scope="col">käyttäjänimi</th>
+            
+        {% for kayttaja in asiakkaat |sort(attribute='sukunimi')%}
+        <tr>
+            <td>{{ kayttaja.etunimi }}</td>
+            <td>{{ kayttaja.sukunimi }}</td>
+            <td>{{ kayttaja.login }}</td>
+            <td><a class="btn btn-secondary" disabled href="#">Paikanpitäjä: päivitä</a></td>
+            <td><form method="POST" action="{{ url_for('asiakas_poista', id=kayttaja.id) }}">
+                    <input type ="hidden" name="" value ="{{kayttaja.id}}"/>
+                    <input class="btn btn-primary" type="submit" value="Poista asiakas"/>
+                </form>
+            </td>  
+        </tr>
+        
+        {% endfor %}
+    </table>
+
+
+{% endblock %}
+
+
