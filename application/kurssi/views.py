@@ -24,14 +24,8 @@ def get_ohjaaja_tuplet():
 def kurssi_form():
     form = KurssiLomake()
 
-    form.ohjaaja.choices = get_ohjaaja_tuplet()
-    #form.ohjaaja.choices = [(current_user.etunimi, current_user.etunimi)]
-    #ylläolevan käyttö rikkoi tietokannan, eli tee niin että saa ohjaaja-olion
-
-    #myöskään tämä allaoleva ei toiminut ("Kayttaja is not iterable") 
-    #kirjautunut_ohjaaja= Kayttaja.query.get(current_user.id).ohjaaja
-    #kirjautuneen_ohjaajan_etunimi = Kayttaja.query.get(current_user).etunimi 
-    #form.ohjaaja.choices = [(kirjautunut_ohjaaja.id, kirjautuneen_ohjaajan_etunimi)]
+    kayttaja = Kayttaja.query.get(current_user.id)
+    form.ohjaaja.choices = [(kayttaja.ohjaaja.id, kayttaja.etunimi)]
 
     kurssit = Kurssi.query.filter(Kurssi.aika >= datetime.datetime.now())
     return render_template("kurssi/uusi.html", kurssit = kurssit, form = form)
@@ -49,7 +43,9 @@ def kurssi_create():
     if not form.validate() or pvm < datetime.date.today():
         if pvm < datetime.date.today():
             form.pvm.errors = [ "Kurssin päivämäärän tulee olla tulevaisuudessa."]
-        form.ohjaaja.choices = get_ohjaaja_tuplet()
+        kayttaja = Kayttaja.query.get(current_user.id)
+        form.ohjaaja.choices = [(kayttaja.ohjaaja.id, kayttaja.etunimi)]
+
         kurssit = Kurssi.query.filter(Kurssi.aika >= datetime.datetime.now())
         return render_template("kurssi/uusi.html", form = form, kurssit = kurssit)
 
@@ -78,7 +74,10 @@ def kurssi_muokkaa(id):
     ohjaaja_id = request.form.get("ohjaaja")
     form.ohjaaja.choices = [(ohjaaja_id, ohjaaja_id)]
 
-    form.ohjaaja.choices = get_ohjaaja_tuplet()
+    #form.ohjaaja.choices = get_ohjaaja_tuplet()
+    kayttaja = Kayttaja.query.get(current_user.id)
+    form.ohjaaja.choices = [(kayttaja.ohjaaja.id, kayttaja.etunimi)]
+
 
     return render_template("kurssi/muokkaa.html", form = form, id = kurssi.id)
 
@@ -96,7 +95,9 @@ def kurssi_muokkaa_save(id):
     if not form.validate() or pvm < datetime.date.today():
         if pvm < datetime.date.today():
             form.pvm.errors = [ "Kurssin päivämäärän tulee olla tulevaisuudessa."]
-            form.ohjaaja.choices = get_ohjaaja_tuplet()
+        kayttaja = Kayttaja.query.get(current_user.id)
+        form.ohjaaja.choices = [(kayttaja.ohjaaja.id, kayttaja.etunimi)]
+            
         return render_template("kurssi/muokkaa.html", form = form, id = kurssi.id)
     
     kurssi.kuvaus = form.kuvaus.data
@@ -177,13 +178,21 @@ def peruuta_ilmoittautuminen(id):
 @app.route("/kurssi/tilastot")
 @login_required(required_role="ADMIN")
 def kurssi_tilastot():
-    #PAGING
-    # from flask import request
-    # page = request.args.get('page')
-    # asiakkaita = Kurssi.asiakkaita_per_kurssi()[]
-    #sivutus. Ota osa listasta mukaan.
-    return render_template("/kurssi/tilastot.html", asiakkaita_per_kurssi = Kurssi.asiakkaita_per_kurssi(),
-    suosituimmat_kurssityypit = Kurssi.suosituimmat_kurssityypit())
+    current_page = request.args.get('page')
+    if current_page is None:
+        current_page = 1
+    else:
+        current_page = int(current_page)
+    offset = (current_page - 1) * 4 
+    asiakkaita_per_kurssi_kaikki = Kurssi.asiakkaita_per_kurssi()
+    page = asiakkaita_per_kurssi_kaikki[offset:offset+4]
+    
+    next_page = min(current_page + 1, int(len(asiakkaita_per_kurssi_kaikki) / 4) + 1)
+    prev_page = max(current_page - 1, 1)
+
+    return render_template("/kurssi/tilastot.html", asiakkaita_per_kurssi = page,
+        suosituimmat_kurssityypit = Kurssi.suosituimmat_kurssityypit(), current_page = current_page, next_page = next_page, 
+        prev_page = prev_page)
 
 #kurssitarjonta (näytetään ei-kirjautuneelle käyttäjälle)
 
