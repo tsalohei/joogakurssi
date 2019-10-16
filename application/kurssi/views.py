@@ -84,14 +84,18 @@ def kurssi_muokkaa_save(id):
     ohjaaja_id = request.form.get("ohjaaja")
     form.ohjaaja.choices = [(ohjaaja_id, ohjaaja_id)]
 
-    if not form.validate():
+    pvm = form.pvm.data
+
+    if not form.validate() or pvm < datetime.date.today():
+        if pvm < datetime.date.today():
+            form.pvm.errors = [ "Kurssin päivämäärän tulee olla tulevaisuudessa."]
+            form.ohjaaja.choices = get_ohjaaja_tuplet()
         return render_template("kurssi/muokkaa.html", form = form, id = kurssi.id)
     
     kurssi.kuvaus = form.kuvaus.data
     
     kurssi.ohjaaja_id = form.ohjaaja.data
 
-    pvm = form.pvm.data
     kellonaika = form.kellonaika.data 
     ajankohta = pvm.strftime('%Y-%m-%d') + " " + kellonaika.strftime('%H:%M')
     aika_dt = datetime.datetime.strptime(ajankohta, '%Y-%m-%d %H:%M')

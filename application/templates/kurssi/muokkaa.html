@@ -19,5 +19,8 @@
       {% for error in form.kesto.errors %}
       <li style="color:red;">{{ error }}</li>
       {% endfor %}
+      {% for error in form.pvm.errors %}
+      <li style="color:red;">{{ error }}</li>
+      {% endfor %} 
   </ul>
 {% endblock %}  
