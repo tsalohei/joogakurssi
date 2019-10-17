@@ -8,41 +8,42 @@
 
 {% if asiakkaita_per_kurssi is defined %}
 <table class="table">
-        <tr>
-            <th scope="col">Kurssin nimi</th>
-            <th scope="col">ohjaaja</th>
-            <th scope="col">ajankohta</th>
-            <th scope="col">kesto (h)</th>
-            <th scope="col">asiakkaita</th>
-        </tr>
-        {% for kurssi in asiakkaita_per_kurssi %}
-        <tr>
-            <td>{{ kurssi.kuvaus }}</td>
-            <td>{{ kurssi.ohjaaja }}</td>
-            <td>{{ kurssi.aika }}</td>
-            <td>{{ kurssi.kesto }}</td>
-            <td>{{ kurssi.asiakkaita }}</td>
-        </tr>
-        {% endfor %}       
+  <tr>
+    <th scope="col">Kurssin nimi</th>
+    <th scope="col">ohjaaja</th>
+    <th scope="col">ajankohta</th>
+    <th scope="col">kesto (h)</th>
+    <th scope="col">asiakkaita</th>
+  </tr>
+  {% for kurssi in asiakkaita_per_kurssi %}
+  <tr>
+    <td>{{ kurssi.kuvaus }}</td>
+    <td>{{ kurssi.ohjaaja }}</td>
+    <td>{{ kurssi.aika }}</td>
+    <td>{{ kurssi.kesto }}</td>
+    <td>{{ kurssi.asiakkaita }}</td>
+  </tr>
+  {% endfor %}       
 </table>
+
 <div style="margin-left: auto;margin-right: auto;width: 100px;">
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="{{ url_for('kurssi_tilastot') }}?page={{prev_page}}" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
-            </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">{{current_page}}</a></li>
-        <li class="page-item">
-            <a class="page-link" href="{{ url_for('kurssi_tilastot') }}?page={{next_page}}" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
-            </a>
-        </li>
-        </ul>
-    </nav>
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('kurssi_tilastot') }}?page={{prev_page}}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">{{current_page}}</a></li>
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('kurssi_tilastot') }}?page={{next_page}}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>
 
 {% endif %}
@@ -50,19 +51,17 @@
 <h2>Suosituimmat kurssityypit</h2>
 {% if suosituimmat_kurssityypit is defined %}
 <table class="table">
-        <tr>
-            <th scope="col">Kurssin tyyppi</th>
-            <th scope="col">asiakkaita</th>
-        </tr>
-        {% for kurssi in suosituimmat_kurssityypit %}
-        <tr>
-            <td>{{ kurssi.kuvaus }}</td>
-            <td>{{ kurssi.asiakkaita }}</td>
-        </tr>
-        {% endfor %}
-       
+  <tr>
+    <th scope="col">Kurssin tyyppi</th>
+    <th scope="col">asiakkaita</th>
+  </tr>
+  {% for kurssi in suosituimmat_kurssityypit %}
+  <tr>
+    <td>{{ kurssi.kuvaus }}</td>
+    <td>{{ kurssi.asiakkaita }}</td>
+  </tr>
+  {% endfor %}     
 </table>
 {% endif %}
-
 
 {% endblock %}

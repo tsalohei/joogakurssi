@@ -4,63 +4,58 @@
 
 <h1>Lisää uusi kurssi</h1>
 <form method="POST" action="{{ url_for('kurssi_create') }}">
-  
-    {{form.kuvaus.label}}
-    {{form.kuvaus}}
-    {{form.ohjaaja.label}}
-    {{form.ohjaaja}}
-    {{form.pvm.label}}
-    {{form.pvm}}
-    {{form.kellonaika.label}}
-    {{form.kellonaika}}
-    {{form.kesto.label}}
-    {{form.kesto}}
-    <input class="btn btn-primary" type="submit" value="Lisää kurssi"/>
-  </form>
+  {{form.kuvaus.label}}
+  {{form.kuvaus}}
+  {{form.ohjaaja.label}}
+  {{form.ohjaaja}}
+  {{form.pvm.label}}
+  {{form.pvm}}
+  {{form.kellonaika.label}}
+  {{form.kellonaika}}
+  {{form.kesto.label}}
+  {{form.kesto}}
+  <input class="btn btn-primary" type="submit" value="Lisää kurssi"/>
+</form>
   <ul>
-      {% for error in form.kesto.errors %}
-      <li style="color:red;">{{ error }}</li>
-      {% endfor %}
-      {% for error in form.pvm.errors %}
-      <li style="color:red;">{{ error }}</li>
-      {% endfor %}      
+    {% for error in form.kesto.errors %}
+    <li style="color:red;">{{ error }}</li>
+    {% endfor %}
+    {% for error in form.pvm.errors %}
+    <li style="color:red;">{{ error }}</li>
+    {% endfor %}      
   </ul>
 
 <h1>Muokkaa kursseja</h1>
 <table class="table">
-    <tr>
-        <th scope="col">Kurssin nimi</th>
-        <th scope="col">ohjaaja</th>
-        <th scope="col">ajankohta</th>
-        <th scope="col">kesto (h)</th>
-        
-    </tr>    
-    {% for kurssi in kurssit |sort(attribute='aika') %}
-    <tr>
-        <td>{{ kurssi.kuvaus }}</td>
-        <td>{{ kurssi.ohjaaja.kayttaja.etunimi }}</td>
-        <td>{{ kurssi.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
-        <td>{{ kurssi.kesto }}</td>
-
+  <tr>
+    <th scope="col">Kurssin nimi</th>
+    <th scope="col">ohjaaja</th>
+    <th scope="col">ajankohta</th>
+    <th scope="col">kesto (h)</th>
+  </tr>    
+  {% for kurssi in kurssit |sort(attribute='aika') %}
+  <tr>
+    <td>{{ kurssi.kuvaus }}</td>
+    <td>{{ kurssi.ohjaaja.kayttaja.etunimi }}</td>
+    <td>{{ kurssi.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
+    <td>{{ kurssi.kesto }}</td>
+    {% if kurssi.ohjaaja.kayttaja.id == current_user.id %}
+    <td><a class="btn btn-primary" href="{{ url_for('kurssi_muokkaa', id=kurssi.id ) }}">Päivitä kurssin tietoja</a></td>
+    {% else %}
+    <td><a class="btn btn-secondary" disabled href="#">Päivitä kurssin tietoja</a></td>
+    {% endif %}
+    <td>
+      <form method="POST" action="{{ url_for('kurssi_poista') }}">
+        <input type ="hidden" name="kurssi_id" value ="{{kurssi.id}}"/>
         {% if kurssi.ohjaaja.kayttaja.id == current_user.id %}
-        <td><a class="btn btn-primary" href="{{ url_for('kurssi_muokkaa', id=kurssi.id ) }}">Päivitä kurssin tietoja</a></td>
+        <input class="btn btn-primary" type="submit" value="Poista kurssi"/>
         {% else %}
-        <td><a class="btn btn-secondary" disabled href="#">Päivitä kurssin tietoja</a></td>
+        <a class="btn btn-secondary" disabled href="#">Poista kurssi</a>
         {% endif %}
-        <td>
-          <form method="POST" action="{{ url_for('kurssi_poista') }}">
-            <input type ="hidden" name="kurssi_id" value ="{{kurssi.id}}"/>
-            {% if kurssi.ohjaaja.kayttaja.id == current_user.id %}
-            <input class="btn btn-primary" type="submit" value="Poista kurssi"/>
-            {% else %}
-            <a class="btn btn-secondary" disabled href="#">Poista kurssi</a>
-            {% endif %}
-          </form>
-        </td>
-        
-    </tr>
-    {% endfor %}
+      </form>
+    </td>    
+  </tr>
+  {% endfor %}
 </table>
-
 
 {% endblock %}

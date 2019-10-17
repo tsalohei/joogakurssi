@@ -1,26 +1,25 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form method="POST" action="{{ url_for('kurssi_muokkaa_save', id=id) }}">
-  
-    {{form.kuvaus.label}}
-    {{form.kuvaus}}
-    {{form.ohjaaja.label}}
-    {{form.ohjaaja}}
-    {{form.pvm.label}}
-    {{form.pvm}}
-    {{form.kellonaika.label}}
-    {{form.kellonaika}}
-    {{form.kesto.label}}
-    {{form.kesto}}
-    <input class="btn btn-primary" type="submit" value="Päivitä"/>
-  </form>
+<form method="POST" action="{{ url_for('kurssi_muokkaa_save', id=id) }}"> 
+  {{form.kuvaus.label}}
+  {{form.kuvaus}}
+  {{form.ohjaaja.label}}
+  {{form.ohjaaja}}
+  {{form.pvm.label}}
+  {{form.pvm}}
+  {{form.kellonaika.label}}
+  {{form.kellonaika}}
+  {{form.kesto.label}}
+  {{form.kesto}}
+  <input class="btn btn-primary" type="submit" value="Päivitä"/>
+</form>
   <ul>
-      {% for error in form.kesto.errors %}
+    {% for error in form.kesto.errors %}
       <li style="color:red;">{{ error }}</li>
-      {% endfor %}
-      {% for error in form.pvm.errors %}
+    {% endfor %}
+    {% for error in form.pvm.errors %}
       <li style="color:red;">{{ error }}</li>
-      {% endfor %} 
+    {% endfor %} 
   </ul>
 {% endblock %}  

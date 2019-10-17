@@ -4,42 +4,38 @@
 
 <h1>Ilmoittaudu kursseille</h1>
 <table class="table">
-    
-    <tr>
-        <th scope="col">Kurssin nimi</th>
-        <th scope="col">ohjaaja</th>
-        <th scope="col">ajankohta</th>
-        <th scope="col">kesto (h)</th>
-        <th scope="col">ilmoittaudu</th>
-        
-    </tr>
+  <tr>
+    <th scope="col">Kurssin nimi</th>
+    <th scope="col">ohjaaja</th>
+    <th scope="col">ajankohta</th>
+    <th scope="col">kesto (h)</th>
+    <th scope="col">ilmoittaudu</th>        
+  </tr>
 
-    {% for kurssi in asiakkaan_ilmoittautumiset |sort(attribute='aika')|sort(attribute='kuvaus') %}
-    <tr>
-        <td>{{ kurssi.kuvaus }}</td>
-        <td>{{ kurssi.ohjaaja.kayttaja.etunimi }}</td>
-        <td>{{ kurssi.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
-        <td>{{ kurssi.kesto }}</td>
-        <td><a class="btn btn-secondary" disabled href="#">Olet ilmoittautunut!</a></td>
-        <form method="POST" action="{{ url_for('peruuta_ilmoittautuminen', id=kurssi.id) }}">
-        <td><input class="btn btn-primary" type="submit" value="Peruuta ilmoittautuminen"/></td>
+  {% for kurssi in asiakkaan_ilmoittautumiset |sort(attribute='aika')|sort(attribute='kuvaus') %}
+  <tr>
+    <td>{{ kurssi.kuvaus }}</td>
+    <td>{{ kurssi.ohjaaja.kayttaja.etunimi }}</td>
+    <td>{{ kurssi.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
+    <td>{{ kurssi.kesto }}</td>
+    <td><a class="btn btn-secondary" disabled href="#">Olet ilmoittautunut!</a></td>
+    <form method="POST" action="{{ url_for('peruuta_ilmoittautuminen', id=kurssi.id) }}">
+      <td><input class="btn btn-primary" type="submit" value="Peruuta ilmoittautuminen"/></td>
     </form>
-    </tr>
-    
-    {% endfor %}
+  </tr>   
+  {% endfor %}
 
-    {% for kurssi in kurssit |sort(attribute='aika')|sort(attribute='kuvaus') %}
-    <tr>
+  {% for kurssi in kurssit |sort(attribute='aika')|sort(attribute='kuvaus') %}
+  <tr>
     <form method="POST" action="{{ url_for('kurssi_ilmoittaudu', id=kurssi.id) }}">
-        <td>{{ kurssi.kuvaus }}</td>
-        <td>{{ kurssi.ohjaaja.kayttaja.etunimi }}</td>
-        <td>{{ kurssi.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
-        <td>{{ kurssi.kesto }}</td>
-        <td><input class="btn btn-primary" type="submit" value="Ilmoittaudu"/></td>
+      <td>{{ kurssi.kuvaus }}</td>
+      <td>{{ kurssi.ohjaaja.kayttaja.etunimi }}</td>
+      <td>{{ kurssi.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
+      <td>{{ kurssi.kesto }}</td>
+      <td><input class="btn btn-primary" type="submit" value="Ilmoittaudu"/></td>
     </form>
-    </tr>
-    
-    {% endfor %}
+  </tr>  
+  {% endfor %}
 </table>
 
 {% endblock %}  

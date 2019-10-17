@@ -8,22 +8,21 @@
 
 
 <table class="table">
-        <tr>
-            <th scope="col">Kurssin nimi</th>
-            <th scope="col">ohjaaja</th>
-            <th scope="col">ajankohta</th>
-            <th scope="col">kesto (h)</th>
-            
-        {% for kurssi in kurssit |sort(attribute='aika')|sort(attribute='kuvaus') %}
-        <tr>
-            <td>{{ kurssi.kuvaus }}</td>
-            <td>{{ kurssi.ohjaaja.kayttaja.etunimi }}</td>
-            <td>{{ kurssi.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
-            <td>{{ kurssi.kesto }}</td>
-        </tr>
+  <tr>
+    <th scope="col">Kurssin nimi</th>
+    <th scope="col">ohjaaja</th>
+    <th scope="col">ajankohta</th>
+    <th scope="col">kesto (h)</th>
         
-        {% endfor %}
-    </table>
+    {% for kurssi in kurssit |sort(attribute='aika')|sort(attribute='kuvaus') %}
+  <tr>
+    <td>{{ kurssi.kuvaus }}</td>
+    <td>{{ kurssi.ohjaaja.kayttaja.etunimi }}</td>
+    <td>{{ kurssi.aika.strftime('%d.%m.%y klo %H.%M') }}</td>
+    <td>{{ kurssi.kesto }}</td>
+  </tr>       
+    {% endfor %}
+</table>
 
 
 {% endblock %}
