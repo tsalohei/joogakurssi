@@ -35,7 +35,7 @@ class Kurssi(db.Model):
         " LEFT JOIN asiakas"
         " ON ilmoittautuminen.asiakas_id = asiakas.id"
         " GROUP BY kurssi.kuvaus, kurssi.aika, kayttaja.etunimi, kurssi.kesto"
-        " ORDER BY kurssi.aika")
+        " ORDER BY kurssi.aika DESC")
         res = db.engine.execute(stmt)
 
         response = []
