@@ -12,7 +12,7 @@
             <th scope="col">sukunimi</th>
             <th scope="col">käyttäjänimi</th>
             
-        {% for kayttaja in asiakkaat |sort(attribute='sukunimi')%}
+        {% for kayttaja in asiakkaat %}
         <tr>
             <td>{{ kayttaja.etunimi }}</td>
             <td>{{ kayttaja.sukunimi }}</td>

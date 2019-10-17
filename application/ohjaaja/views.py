@@ -15,7 +15,7 @@ def asiakaslistaus():
         current_page = int(current_page)
     offset = (current_page - 1) * 8 
 
-    asiakkaat = Kayttaja.query.filter_by(is_admin=False).all()
+    asiakkaat = Kayttaja.query.filter_by(is_admin=False).order_by(Kayttaja.sukunimi).all()
     page = asiakkaat[offset:offset+8]
 
     next_page = min(current_page + 1, int(len(asiakkaat) / 8) + 1)
