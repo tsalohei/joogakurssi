@@ -17,7 +17,7 @@
             <td>{{ kayttaja.etunimi }}</td>
             <td>{{ kayttaja.sukunimi }}</td>
             <td>{{ kayttaja.login }}</td>
-            <td><a class="btn btn-secondary" disabled href="#">Paikanpitäjä: päivitä</a></td>
+            <td><a class="btn btn-primary" href="{{ url_for('asiakas_muokkaa', id=kayttaja.id ) }}">Päivitä asiakkaan tietoja</a></td>
             <td><form method="POST" action="{{ url_for('asiakas_poista', id=kayttaja.id) }}">
                     <input type ="hidden" name="" value ="{{kayttaja.id}}"/>
                     <input class="btn btn-primary" type="submit" value="Poista asiakas"/>
