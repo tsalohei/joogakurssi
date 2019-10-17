@@ -86,7 +86,7 @@ Sovellus löytyy nyt osoitteesta https://joku-kiva-nimi.herokuapp.com/
 
 Ohjaajien lisääminen tietokantaan tapahtuu käyttäen PostgreSQL-tietokannanhallintajärjestelmää. Kirjautuminen Herokun PostgeSQL-tietokantaan tapahtuu seuraavalla komennolla:
 
-    heroku pg:psql.
+    heroku pg:psql
 
 Ohjaajien lisääminen tapahtuu muuten samalla tavalla kuin paikallisesti, mutta kun lisäät rivin tauluun kayttaja, saa muuttuja is_admin arvoksi 't' eikä '1' niikuin SQLitessä:
 
