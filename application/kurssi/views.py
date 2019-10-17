@@ -9,15 +9,6 @@ import datetime
 from flask_login import current_user
 from sqlalchemy.sql import text
 
-#super_adminia varten
-#def get_ohjaaja_tuplet():
-#    lista = Ohjaaja.query.all()
-#    tuplet = []
-#    for ohjaaja in lista: 
-#        x = Kayttaja.query.get(ohjaaja.kayttaja_id)
-#        tuplet.append((ohjaaja.id, x.etunimi))
-#    return tuplet
-
 #uuden kurssin luominen
 
 @app.route("/kurssi/uusi/")

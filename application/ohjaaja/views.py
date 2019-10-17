@@ -8,8 +8,21 @@ from flask_login import current_user
 @app.route("/ohjaaja/asiakkaat")
 @login_required(required_role="ADMIN")
 def asiakaslistaus():
-    asiakkaat = Kayttaja.query.filter_by(is_admin=False)
-    return render_template("/ohjaaja/asiakkaat.html", asiakkaat = asiakkaat)
+    current_page = request.args.get('page')
+    if current_page is None:
+        current_page = 1
+    else:
+        current_page = int(current_page)
+    offset = (current_page - 1) * 8 
+
+    asiakkaat = Kayttaja.query.filter_by(is_admin=False).all()
+    page = asiakkaat[offset:offset+8]
+
+    next_page = min(current_page + 1, int(len(asiakkaat) / 8) + 1)
+    prev_page = max(current_page - 1, 1)
+
+    return render_template("/ohjaaja/asiakkaat.html", asiakkaat = page, current_page = current_page, next_page = next_page, 
+        prev_page = prev_page)
 
 
 @app.route("/ohjaaja/asiakaspoista/<id>", methods=["POST"])

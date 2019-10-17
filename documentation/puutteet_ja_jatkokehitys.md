@@ -1,6 +1,6 @@
 # Puutteet ja jatkokehitysideat
 
-* Tärkein jatkokehitysidea liittyy käyttäjärooleihin. Sovellukseen tulisi lisätä rooli super_admin, joka voisi lisätä kursseja kaikille ohjaajille, ja muokata kaikkien ohjaajien kursseja. Nyt kukin ohjaaja voi lisätä kursseja vain itselleen, ja muokata omia kurssejaan.
+* Tärkein jatkokehitysidea liittyy käyttäjärooleihin. Sovellukseen tulisi lisätä rooli super_admin, joka voisi lisätä kursseja kaikille ohjaajille, ja muokata kaikkien ohjaajien kursseja. Nyt kukin ohjaaja voi lisätä kursseja vain itselleen, ja muokata omia kurssejaan. 
 
 * Tietokannasta löytyy ohjaajien tuntipalkat, mutta tätä tietoa ei hyödynnetä millään tavalla. Tilastot-osioon voisi lisätä tiedon ohjaajien minimi-, maksimi-, ja keskiarvopalkasta.
 
