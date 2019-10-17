@@ -1,5 +1,4 @@
 from flask import render_template, request, redirect, url_for
-from flask_login import login_required
 from application import app, db, login_required
 from application.auth.models import Kayttaja
 from application.asiakas.models import Asiakas 
@@ -7,14 +6,14 @@ from application.auth.forms import KayttajaLomake, NimenPaivitysLomake
 from flask_login import current_user
 
 @app.route("/ohjaaja/asiakkaat")
-#@login_required(required_role="ADMIN")
+@login_required(required_role="ADMIN")
 def asiakaslistaus():
     asiakkaat = Kayttaja.query.filter_by(is_admin=False)
     return render_template("/ohjaaja/asiakkaat.html", asiakkaat = asiakkaat)
 
 
 @app.route("/ohjaaja/asiakaspoista/<id>", methods=["POST"])
-#@login_required(required_role="ADMIN")
+@login_required(required_role="ADMIN")
 def asiakas_poista(id):
     kayttaja = Kayttaja.query.get(id)
 
@@ -27,7 +26,7 @@ def asiakas_poista(id):
 
 
 @app.route("/ohjaaja/asiakasmuokkaa/<id>")
-#@login_required(required_role="ADMIN")
+@login_required(required_role="ADMIN")
 def asiakas_muokkaa(id):
     kayttaja = Kayttaja.query.get(id)
     form = NimenPaivitysLomake(obj=kayttaja)
@@ -38,7 +37,7 @@ def asiakas_muokkaa(id):
 
 
 @app.route("/ohjaaja/asiakasmuokkaa/save/<id>", methods=["POST"]) 
-#@login_required(required_role="ADMIN")
+@login_required(required_role="ADMIN")
 def asiakas_muokkaa_save(id):
     kayttaja = db.session.query(Kayttaja).get(id)
     form = NimenPaivitysLomake(request.form)
