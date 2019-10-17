@@ -9,13 +9,14 @@ import datetime
 from flask_login import current_user
 from sqlalchemy.sql import text
 
-def get_ohjaaja_tuplet():
-    lista = Ohjaaja.query.all()
-    tuplet = []
-    for ohjaaja in lista: 
-        x = Kayttaja.query.get(ohjaaja.kayttaja_id)
-        tuplet.append((ohjaaja.id, x.etunimi))
-    return tuplet
+#super_adminia varten
+#def get_ohjaaja_tuplet():
+#    lista = Ohjaaja.query.all()
+#    tuplet = []
+#    for ohjaaja in lista: 
+#        x = Kayttaja.query.get(ohjaaja.kayttaja_id)
+#        tuplet.append((ohjaaja.id, x.etunimi))
+#    return tuplet
 
 #uuden kurssin luominen
 
@@ -74,7 +75,6 @@ def kurssi_muokkaa(id):
     ohjaaja_id = request.form.get("ohjaaja")
     form.ohjaaja.choices = [(ohjaaja_id, ohjaaja_id)]
 
-    #form.ohjaaja.choices = get_ohjaaja_tuplet()
     kayttaja = Kayttaja.query.get(current_user.id)
     form.ohjaaja.choices = [(kayttaja.ohjaaja.id, kayttaja.etunimi)]
 
@@ -183,11 +183,11 @@ def kurssi_tilastot():
         current_page = 1
     else:
         current_page = int(current_page)
-    offset = (current_page - 1) * 4 
+    offset = (current_page - 1) * 8 
     asiakkaita_per_kurssi_kaikki = Kurssi.asiakkaita_per_kurssi()
-    page = asiakkaita_per_kurssi_kaikki[offset:offset+4]
+    page = asiakkaita_per_kurssi_kaikki[offset:offset+8]
     
-    next_page = min(current_page + 1, int(len(asiakkaita_per_kurssi_kaikki) / 4) + 1)
+    next_page = min(current_page + 1, int(len(asiakkaita_per_kurssi_kaikki) / 8) + 1)
     prev_page = max(current_page - 1, 1)
 
     return render_template("/kurssi/tilastot.html", asiakkaita_per_kurssi = page,
