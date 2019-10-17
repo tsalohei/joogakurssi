@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('asiakas_muokkaa_save', id=id) }}">
+  {{form.etunimi.label}}<br>
+  {{form.etunimi}}<br>
+  {{form.sukunimi.label}}<br>
+  {{form.sukunimi}}<br><br>
+  <input class="btn btn-primary" type="submit" value="Päivitä"/>
+</form>
+  <ul>
+    {% for error in form.etunimi.errors %}
+    <li style="color:red;">{{ error }}</li>
+    {% endfor %}
+    {% for error in form.sukunimi.errors %}
+    <li style="color:red;">{{ error }}</li>
+    {% endfor %}
+
+  </ul>
+{% endblock %}  

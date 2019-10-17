@@ -22,3 +22,13 @@ class LoginLomake(FlaskForm):
 
     class Meta:
         csrf = False
+
+class NimenPaivitysLomake(FlaskForm):
+    etunimi = StringField("etunimi", [validators.InputRequired(), validators.Regexp("\w[^0-9]", message="Etunimi ei voi koostua tyhjistä välilyönneistä, ja etunimen tulee koostua vain kirjaimista."), 
+    validators.Length(min=2, message="Etunimen tulee olla vähintään 2 ja korkeintaan 50 kirjainta pitkä.")])
+    
+    sukunimi = StringField("sukunimi", [validators.InputRequired(), validators.Regexp("\w[^0-9]", message="Sukunimi ei voi koostua tyhjistä välilyönneistä, ja sukunimen tulee koostua vain kirjaimista."), 
+    validators.Length(min=2, max=50, message="Sukunimen tulee olla vähintään 2 ja korkeintaan 50 kirjainta pitkä.")])
+    
+    class Meta:
+        csrf = False
