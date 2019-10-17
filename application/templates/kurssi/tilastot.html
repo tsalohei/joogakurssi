@@ -15,7 +15,7 @@
             <th scope="col">kesto (h)</th>
             <th scope="col">asiakkaita</th>
         </tr>
-        {% for kurssi in asiakkaita_per_kurssi |sort(attribute='aika')|sort(attribute='kuvaus') %}
+        {% for kurssi in asiakkaita_per_kurssi |sort(attribute='aika') %}
         <tr>
             <td>{{ kurssi.kuvaus }}</td>
             <td>{{ kurssi.ohjaaja }}</td>
