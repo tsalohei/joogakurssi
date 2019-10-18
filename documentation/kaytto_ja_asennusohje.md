@@ -2,11 +2,11 @@
 
 Joogakursseista kiinnostunut henkilö pääsee rekisteröitymään käyttäjäksi (asiakkaaksi) sovelluksen yläpalkin valikosta kohdasta "Rekisteröidy". Tämän jälkeen asiakas voi kirjautua sisään oikeasta yläkulmasta löytyvän "Kirjaudu"-linkin kautta. 
 
-Kirjauduttuaan sisään asiakkaalle ilmestyy yläpalkkiin näkyviin toiminto "Ilmoittaudu kursseille". Tämän linkin takaa löytyy lista tarjolla olevista kursseista sekä toiminnallisuus kursseille ilmoittautumiseen.
+Kirjauduttuaan sisään asiakkaalle ilmestyy yläpalkkiin näkyviin toiminto "Ilmoittaudu kursseille". Tämän linkin takaa löytyy lista tarjolla olevista kursseista sekä toiminnallisuus kursseille ilmoittautumiseen ja ilmoittautumisten perumiseen.
 
 Ohjaajien käyttäjänimet ja salasanat on asetettu asennusvaiheessa (ks. asennusohje alla), eli heille ei ole omaa toimintoa rekisteröitymiseen.
 
-Kirjauduttuaan sisään ohjaajalle ilmestyvät yläpalkkiin näkyviin toiminnot "Hallinnoi kursseja" sekä "Tilastot". Ensimmäisen linkin kautta ohjaaja pääsee lisäämään uusia kursseja sekä muokkaamaan olemassaolevien kurssien tietoja. Tilastot-linkin kautta pääsee tarkastelemaan joogastudion toimintaan liittyviä keskeisiä tilastotietoja.
+Kirjauduttuaan sisään ohjaajalle ilmestyvät yläpalkkiin näkyviin toiminnot "Hallinnoi kursseja", "Hallinnoi asiakkaita" sekä "Tilastot". Ensimmäisen linkin kautta ohjaaja pääsee lisäämään uusia kursseja sekä muokkaamaan olemassaolevien kurssien tietoja. Ohjaaja voi lisätä ja muokata kursseja, joissa on itse ohjaajana. Toisen linkin takaa ohjaaja löytää listan kaikista asiakkaista. Ohjaaja voi myös muokata asiakkaiden tietoja (etu- ja sukunimeä). Tilastot-linkin kautta pääsee tarkastelemaan joogastudion toimintaan liittyviä keskeisiä tilastotietoja.
 
 # Asennusohje 
 
@@ -88,7 +88,7 @@ Ohjaajien lisääminen tietokantaan tapahtuu käyttäen PostgreSQL-tietokannanha
 
     heroku pg:psql
 
-Ohjaajien lisääminen tapahtuu muuten samalla tavalla kuin paikallisesti, mutta kun lisäät rivin tauluun kayttaja, saa muuttuja is_admin arvoksi 't' eikä '1' niikuin SQLitessä:
+Ohjaajien lisääminen tapahtuu muuten samalla tavalla kuin paikallisesti, mutta kun lisäät rivin tauluun kayttaja, saa muuttuja is_admin arvoksi 't' eikä '1' niinkuin SQLitessä:
 
     INSERT INTO kayttaja (etunimi, sukunimi, login, salasana, is_admin) VALUES (?, ?, ?, ?, 't');
 

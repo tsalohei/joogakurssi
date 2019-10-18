@@ -44,7 +44,7 @@
         INSERT INTO ilmoittautuminen (asiakas_id, kurssi_id) VALUES (?, ?);
 
 
-* Asiakas poistaa kurssi-ilmoittautumisen.
+* Asiakas poistaa ilmoittautumisen.
 
         DELETE FROM ilmoittautuminen WHERE ilmoittautuminen.asiakas_id = ? AND ilmoittautuminen.kurssi_id = ?;
 
